@@ -1,0 +1,19 @@
+<div class="section">
+    <h3>{{headingTitle}}</h3>
+    <div>
+        <table>
+            <thead>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="user in users">
+            <td>{{user.id}}</td>
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

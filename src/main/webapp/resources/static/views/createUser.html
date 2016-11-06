@@ -1,0 +1,13 @@
+<div class="section">
+    <h3>{{headingTitle}}</h3>
+    <label ng-model="message"></label>
+    <div class="gallery-section">
+        <form name="createUser" ng-submit="submitCreateUserForm()">
+            <label>Name:</label>
+            <input type="text" ng-model="user.name"><br>
+            <label>Email:</label>
+            <input type="email" ng-model="user.email"><br>
+            <input type="submit" value="Create">
+        </form>
+    </div>
+</div>
