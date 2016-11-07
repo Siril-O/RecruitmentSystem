@@ -1,6 +1,7 @@
 package ua.recruitment.system.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ua.recruitment.system.domain.user.Applicant;
 import ua.recruitment.system.domain.user.PersonInfo;
+import ua.recruitment.system.domain.user.Role;
 import ua.recruitment.system.domain.user.User;
-import ua.recruitment.system.repository.UserRepository;
 import ua.recruitment.system.service.UserService;
 import ua.recruitment.system.web.controller.converter.UserConverter;
 import ua.recruitment.system.web.dto.CreateUserDto;
@@ -23,6 +24,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/user")
+@Secured(value = "hasRole('APPLICANT')")
 public class UserController {
 
     @Autowired
@@ -47,6 +49,7 @@ public class UserController {
         personalInfo.setGender(createUserDto.getGender());
         user.setEmail(createUserDto.getEmail());
         user.setPersonInfo(personalInfo);
+        user.setRole(Role.APPLICANT);
         userService.saveUser(user, createUserDto.getPassword());
     }
 }

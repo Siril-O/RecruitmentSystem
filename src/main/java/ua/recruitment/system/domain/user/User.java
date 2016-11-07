@@ -1,6 +1,5 @@
 package ua.recruitment.system.domain.user;
 
-import javax.management.relation.Role;
 import javax.persistence.*;
 
 /**
@@ -16,7 +15,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "puser", uniqueConstraints = @UniqueConstraint(columnNames = {"email"}))
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "TYPE",  discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "TYPE", discriminatorType = DiscriminatorType.STRING)
 public abstract class User {
 
     @Id
