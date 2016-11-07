@@ -10,9 +10,11 @@ import javax.persistence.*;
 @NamedQueries({
         @NamedQuery(name = "User.find", query = "SELECT u FROM User AS u"),
         @NamedQuery(name = "User.getTotalCount", query = "SELECT count(u.id) FROM User AS u"),
+        @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User AS u WHERE u.email = :email"),
+
 })
 @Entity
-@Table(name = "puser")
+@Table(name = "puser", uniqueConstraints = @UniqueConstraint(columnNames = {"email"}))
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "TYPE",  discriminatorType = DiscriminatorType.STRING)
 public abstract class User {

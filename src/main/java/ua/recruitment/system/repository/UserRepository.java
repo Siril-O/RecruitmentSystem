@@ -7,4 +7,5 @@ import ua.recruitment.system.domain.user.User;
  */
 public interface UserRepository extends CrudRepository<User> {
 
+    User findByUserEmail(String userName);
 }

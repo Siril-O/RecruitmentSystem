@@ -24,7 +24,7 @@ public class UserConverter implements Converter<User, UserDto> {
     public UserDto convert(final User user, final UserDto userDto) {
         final PersonInfo personInfo = user.getPersonInfo();
         userDto.setFirstName(personInfo.getFirstName());
-        userDto.setFirstName(personInfo.getLastName());
+        userDto.setLastName(personInfo.getLastName());
         userDto.setEmail(user.getEmail());
         userDto.setGender(user.getPersonInfo().getGender() != null ? user.getPersonInfo().getGender().toString() : null);
         return userDto;

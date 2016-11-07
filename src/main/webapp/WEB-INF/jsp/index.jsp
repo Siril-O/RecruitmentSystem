@@ -12,6 +12,7 @@
 
 <c:url var="appJsUrl" value="/resources/static/js/app.js" />
 <c:url var="controllerJsUrl" value="/resources/static/js/controller.js" />
+<c:url var="serviceJsUrl" value="/resources/static/js/service.js" />
 <c:url var="bootstrapUrl" value="/webjars/bootstrap/3.3.6/css/bootstrap.css" />
 <c:url var="appCssUrl" value="/resources/static/css/app.css" />
 
@@ -37,6 +38,7 @@
 <script src="${angularRouteUrl}"></script>
 <script src="${appJsUrl}"></script>
 <script src="${controllerJsUrl}"></script>
+<script src="${serviceJsUrl}"></script>
 <link rel="stylesheet" href="${bootstrapUrl}">
 </body>
 </html>

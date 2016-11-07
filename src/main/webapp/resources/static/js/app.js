@@ -9,6 +9,10 @@ app.config(function($routeProvider){
             templateUrl: 'resources/static/views/createUser.html',
             controller: 'createUserController'
         })
+        .when('/login', {
+                templateUrl: 'login.html',
+                controller: 'loginCtrl'
+            })
         .otherwise(
             { redirectTo: '/'}
         );

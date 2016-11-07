@@ -53,4 +53,11 @@ public class UserRepositoryImpl implements UserRepository {
     public void refresh(User entity) {
 
     }
+
+    @Override
+    public User findByUserEmail(String email) {
+        TypedQuery<User> query = entityManager.createNamedQuery("User.findByEmail", User.class);
+        query.setParameter("email", email);
+        return query.getSingleResult();
+    }
 }

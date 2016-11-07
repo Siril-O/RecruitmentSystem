@@ -14,7 +14,7 @@ app.controller('createUserController', ['$scope','$http', function($scope, $http
     $scope.submitCreateUserForm = function(){
             var req = {
              method: 'POST',
-             url: '/RecruitmentSystem/user/',
+             url: '/RecruitmentSystem/user',
              headers: {
                'Content-Type': 'application/json'
              },
