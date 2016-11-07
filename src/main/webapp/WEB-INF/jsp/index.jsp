@@ -31,7 +31,7 @@
         <li><a href="#/user/create">Add new user</a></li>
     </ul>
 </div>
-<div ng-view></div>
+<div ng-view class ="container"></div>
 <script src="${angularUrl}"></script>
 <script src="${angularResourceUrl}"></script>
 <script src="${angularRouteUrl}"></script>

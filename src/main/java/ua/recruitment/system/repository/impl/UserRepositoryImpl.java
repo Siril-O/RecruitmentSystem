@@ -2,7 +2,7 @@ package ua.recruitment.system.repository.impl;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import ua.recruitment.system.domain.User;
+import ua.recruitment.system.domain.user.User;
 import ua.recruitment.system.repository.UserRepository;
 
 import javax.persistence.EntityManager;

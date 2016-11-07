@@ -153,6 +153,13 @@
             <version>${mysql.connector.version}</version>
         </dependency>
         <!-- END MySQL database driver -->
+        <!-- Postgresql -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.3-1102-jdbc41</version>
+        </dependency>
+        <!-- END Postgresql -->
 
         <!-- Connection pool -->
         <dependency>
@@ -218,6 +225,14 @@
             <version>1.1.0.Final</version>
         </dependency>
         <!-- END Bootstrap -->
+
+        <!-- Guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava-base</artifactId>
+            <version>r03</version>
+        </dependency>
+        <!-- END GUAVA -->
     </dependencies>
 
     <build>
