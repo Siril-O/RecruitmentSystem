@@ -238,6 +238,15 @@
             <version>2.3</version>
         </dependency>
         <!-- END Commons -->
+
+        <!-- Guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>r05</version>
+        </dependency>
+        <!-- END Guava -->
+
     </dependencies>
 
     <build>

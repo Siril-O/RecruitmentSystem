@@ -2,27 +2,20 @@ package ua.recruitment.system.domain;
 
 import ua.recruitment.system.domain.user.Recruiter;
 
+import javax.persistence.*;
 import java.util.List;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 /**
  * Created by KIRIL on 06.11.2016.
  */
 @NamedQueries({
         @NamedQuery(name = "Company.find", query = "SELECT c FROM Company AS c"),
+        @NamedQuery(name = "Company.findByName", query = "SELECT c FROM Company AS c WHERE c.name=:name"),
         @NamedQuery(name = "Company.getTotalCount", query = "SELECT count(c.id) FROM Company AS c"),
 })
 
 @Entity
-@Table(name = "company")
+@Table(name = "company", uniqueConstraints = @UniqueConstraint(columnNames = {"name"}))
 public class Company {
 
     @Id
@@ -30,7 +23,7 @@ public class Company {
     private Long id;
     private String name;
     private String description;
-    @OneToMany(mappedBy = "company")
+    @OneToMany(mappedBy = "company", cascade = {CascadeType.PERSIST})
     private List<Recruiter> recruiters;
 
     public Long getId() {

@@ -9,7 +9,9 @@ import java.util.List;
  */
 public interface CompanyService {
 
-    void registerCompany(String name, String description);
+    void registerCompany(Company company);
 
     List<Company> getCompanies();
+
+    Company findByName(String name);
 }

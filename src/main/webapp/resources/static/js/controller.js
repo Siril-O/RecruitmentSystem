@@ -10,8 +10,10 @@ app.controller('UserController', ['$scope','$http', function($scope, $http) {
 
 app.controller('CreateUserController', ['$scope','$http', function($scope, $http) {
 
-    $scope.headingTitle = "Create Person";
+    $scope.headingTitle = "Register";
     $scope.roles =['RECRUITER', 'APPLICANT'];
+    $scope.genders =['MALE', 'FEMALE'];
+    $scope.date = new Date();
 
     $scope.submitCreateUserForm = function(){
       var req = { method: 'POST',

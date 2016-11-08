@@ -6,6 +6,7 @@ package ua.recruitment.system.web.controller.company.dto;
 public class CompanyDto {
     private String name;
     private String description;
+    private String recruiterEmail;
 
     public String getName() {
         return name;
@@ -21,5 +22,13 @@ public class CompanyDto {
 
     public void setDescription(final String description) {
         this.description = description;
+    }
+
+    public String getRecruiterEmail() {
+        return recruiterEmail;
+    }
+
+    public void setRecruiterEmail(String recruiterEmail) {
+        this.recruiterEmail = recruiterEmail;
     }
 }

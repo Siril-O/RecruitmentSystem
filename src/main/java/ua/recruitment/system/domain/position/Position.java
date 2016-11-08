@@ -2,28 +2,27 @@ package ua.recruitment.system.domain.position;
 
 import ua.recruitment.system.domain.Company;
 
+import javax.persistence.*;
 import java.util.Date;
-
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  * Created by KIRIL on 06.11.2016.
  */
+@NamedQueries({
+        @NamedQuery(name = "Position.find", query = "SELECT p FROM Position AS p"),
+        @NamedQuery(name = "Position.findByCode", query = "SELECT p FROM Position AS p WHERE p.code=:code"),
+        @NamedQuery(name = "Position.getTotalCount", query = "SELECT count(p.id) FROM Position AS p"),
+        @NamedQuery(name = "Position.findInStatuses", query = "SELECT p FROM Position AS p WHERE p.positionStatus IN (:statuses)"),
+})
+
+
 @Entity
 public class Position {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String code;
     @ManyToOne
     @JoinColumn(name = "COMPANY_ID")
     private Company company;
@@ -40,6 +39,14 @@ public class Position {
 
     public void setId(final Long id) {
         this.id = id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public Company getCompany() {

@@ -7,6 +7,7 @@ import ua.recruitment.system.service.user.UserService;
 import ua.recruitment.system.web.dto.CreateUserRequest;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.commons.lang.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class DefaultUserService implements UserService {
 
     @Override
     public List<User> getAllUsers() {
-        return userRepository.getList(0, 100);
+        return userRepository.getList(Optional.empty());
     }
 
     @Override

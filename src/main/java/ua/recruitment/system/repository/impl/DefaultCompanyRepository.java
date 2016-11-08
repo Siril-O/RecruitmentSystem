@@ -1,34 +1,34 @@
 package ua.recruitment.system.repository.impl;
 
-import ua.recruitment.system.domain.Company;
-import ua.recruitment.system.repository.CompanyRepository;
-
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+import ua.recruitment.system.domain.Company;
+import ua.recruitment.system.repository.util.AbstractRepository;
+import ua.recruitment.system.repository.CompanyRepository;
+import ua.recruitment.system.repository.util.Paging;
+
+import javax.persistence.TypedQuery;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by Kyrylo_Kovalchuk on 11/8/2016.
  */
 @Repository
-public class DefaultCompanyRepository implements CompanyRepository {
-
-    @PersistenceContext
-    protected EntityManager entityManager;
+public class DefaultCompanyRepository extends AbstractRepository<Company> implements CompanyRepository {
 
     @Override
+    @Transactional
     public void create(final Company entity) {
         entityManager.persist(entity);
     }
 
     @Override
-    public void update(final Company entity) {
-        entityManager.merge(entity);
-
+    @Transactional
+    public void update(final Company company) {
+        if (company != null && company.getId() != null) {
+            persist(company, false);
+        }
     }
 
     @Override
@@ -37,20 +37,24 @@ public class DefaultCompanyRepository implements CompanyRepository {
     }
 
     @Override
-    public List<Company> getList(final Integer startPosition, final Integer maxResults) {
-        TypedQuery<Company> query = entityManager.createNamedQuery("Company.find", Company.class);
-        query.setFirstResult(startPosition);
-        query.setMaxResults(maxResults);
-        return query.getResultList();
+    public List<Company> getList(Optional<Paging> pagingOptional) {
+        return getList(pagingOptional, "Company.find", Company.class);
     }
 
     @Override
     public Long getTotalResultCount() {
-        return null;
+        return getTotalResultCount("Company.getTotalCount");
     }
 
     @Override
     public void refresh(final Company entity) {
+        entityManager.refresh(entity);
+    }
 
+    @Override
+    public Company findByName(String name) {
+        TypedQuery<Company> query = entityManager.createNamedQuery("Company.findByName", Company.class);
+        query.setParameter("name", name);
+        return query.getSingleResult();
     }
 }

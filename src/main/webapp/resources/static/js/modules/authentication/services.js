@@ -25,11 +25,13 @@ angular.module('Authentication')
             var authdata = Base64.encode(username + ':' + password);
             var req = { method: 'POST',
                         url: '/RecruitmentSystem/user/login',
-                        headers: {'Authorization': 'Basic ' + authdata}
+                        headers: {
+                                   'Authorization': 'Basic ' + authdata,
+                                   'X-Requested-With' :  'XMLHttpRequest'
+                                }
                       }
 
         console.log(req);
-        $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
         $http(req).then(function successCallback(response) {
                                  response.success = 'Success';
                                  callback(response);

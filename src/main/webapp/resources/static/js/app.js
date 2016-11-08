@@ -10,7 +10,7 @@ app.config(function($routeProvider){
             templateUrl: 'resources/static/views/users.html',
             controller: 'UserController'
         })
-        .when('/user/create',{
+        .when('/user/register',{
             templateUrl: 'resources/static/views/createUser.html',
             controller: 'CreateUserController'
         })
@@ -32,7 +32,7 @@ app.config(function($routeProvider){
 
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // redirect to login page if not logged in
-            if ($location.path() !== '/login' && !$rootScope.globals.currentUser) {
+            if ($location.path() !== '/login' && $location.path() !== '/user/register' && !$rootScope.globals.currentUser) {
                 $location.path('/login');
             }
         });

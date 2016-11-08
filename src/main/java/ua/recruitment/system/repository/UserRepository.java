@@ -1,6 +1,7 @@
 package ua.recruitment.system.repository;
 
 import ua.recruitment.system.domain.user.User;
+import ua.recruitment.system.repository.util.CrudRepository;
 
 /**
  * Created by KIRIL on 06.11.2016.

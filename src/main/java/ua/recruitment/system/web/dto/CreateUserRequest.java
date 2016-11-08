@@ -1,17 +1,19 @@
 package ua.recruitment.system.web.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import ua.recruitment.system.domain.user.ApplicantStatus;
 import ua.recruitment.system.domain.user.Gender;
 import ua.recruitment.system.domain.user.Role;
 
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 /**
  * Created by KIRIL on 06.11.2016.
  */
 public class CreateUserRequest {
 
-    @NotNull()
+    @NotNull
     private String firstName;
     @NotNull
     private String lastName;
@@ -22,6 +24,10 @@ public class CreateUserRequest {
     private Gender gender;
     @NotNull
     private Role role;
+    @JsonFormat(pattern = "yyyy-mm-dd")
+    private Date dateOfBirth;
+
+    private String educationInfo;
     private ApplicantStatus applicantStatus;
 
     public String getFirstName() {
@@ -78,5 +84,21 @@ public class CreateUserRequest {
 
     public void setApplicantStatus(final ApplicantStatus applicantStatus) {
         this.applicantStatus = applicantStatus;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getEducationInfo() {
+        return educationInfo;
+    }
+
+    public void setEducationInfo(String educationInfo) {
+        this.educationInfo = educationInfo;
     }
 }

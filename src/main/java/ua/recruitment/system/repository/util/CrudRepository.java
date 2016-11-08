@@ -1,6 +1,9 @@
-package ua.recruitment.system.repository;
+package ua.recruitment.system.repository.util;
+
+import ua.recruitment.system.repository.util.Paging;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by KIRIL on 06.11.2016.
@@ -13,7 +16,7 @@ public interface CrudRepository<T> {
 
     T findById(final Long id);
 
-    List<T> getList(final Integer startPosition, final Integer maxResults);
+    List<T> getList(Optional<Paging> pagingOptional);
 
     Long getTotalResultCount();
 

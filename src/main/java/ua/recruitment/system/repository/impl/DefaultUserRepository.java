@@ -1,25 +1,22 @@
 package ua.recruitment.system.repository.impl;
 
-import ua.recruitment.system.domain.user.User;
-import ua.recruitment.system.repository.UserRepository;
-
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import ua.recruitment.system.domain.user.User;
+import ua.recruitment.system.repository.util.AbstractRepository;
+import ua.recruitment.system.repository.UserRepository;
+import ua.recruitment.system.repository.util.Paging;
+
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by KIRIL on 06.11.2016.
  */
 @Repository
-public class UserRepositoryImpl implements UserRepository {
-
-    @PersistenceContext
-    protected EntityManager entityManager;
+public class DefaultUserRepository extends AbstractRepository<User> implements UserRepository {
 
     @Override
     @Transactional
@@ -29,8 +26,10 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     @Transactional
-    public void update(User entity) {
-
+    public void update(User user) {
+        if (user != null && user.getId() != null) {
+            persist(user, false);
+        }
     }
 
     @Override
@@ -39,21 +38,18 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> getList(Integer startPosition, Integer maxResults) {
-        TypedQuery<User> query = entityManager.createNamedQuery("User.find", User.class);
-        query.setFirstResult(startPosition);
-        query.setMaxResults(maxResults);
-        return query.getResultList();
+    public List<User> getList(Optional<Paging> pagingOptional) {
+        return getList(pagingOptional, "User.find", User.class);
     }
 
     @Override
     public Long getTotalResultCount() {
-        return null;
+        return getTotalResultCount("User.getTotalCount");
     }
 
     @Override
     public void refresh(User entity) {
-
+        entityManager.refresh(entity);
     }
 
     @Override
@@ -65,8 +61,8 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public long countByEmail(final String email) {
-        TypedQuery<Long> query = entityManager.createNamedQuery("User.countByEmail", Long.class);
+        Query query = entityManager.createNamedQuery("User.countByEmail");
         query.setParameter("email", email);
-        return query.getSingleResult().longValue();
+        return (long) query.getSingleResult();
     }
 }

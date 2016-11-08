@@ -11,12 +11,13 @@ public class RegisterCompanyRequest {
     private String name;
     @NotNull
     private String description;
+    private String recruiterEmail;
 
     public String getName() {
         return name;
     }
 
-    public void setName(final String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -24,7 +25,15 @@ public class RegisterCompanyRequest {
         return description;
     }
 
-    public void setDescription(final String description) {
+    public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getRecruiterEmail() {
+        return recruiterEmail;
+    }
+
+    public void setRecruiterEmail(String recruiterEmail) {
+        this.recruiterEmail = recruiterEmail;
     }
 }

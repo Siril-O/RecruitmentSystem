@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  * Created by KIRIL on 06.11.2016.
  */
 @Configuration
-@ComponentScan(basePackages = {"ua.recruitment.system.service"})
+@ComponentScan(basePackages = {"ua.recruitment.system.service", "ua.recruitment.system.facade"})
 @Import(value = {RepositoryConfig.class})
 public class ApplicationConfig{
 
