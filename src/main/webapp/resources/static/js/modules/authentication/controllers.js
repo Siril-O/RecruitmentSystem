@@ -15,7 +15,6 @@ angular.module('Authentication')
                     $location.path('/');
                 } else {
                     $scope.error = response.message;
-                    $scope.dataLoading = false;
                 }
             });
         };
@@ -24,5 +23,5 @@ angular.module('Authentication')
         AuthenticationService.ClearCredentials();
         $location.path('/login');
         };
-    }])
+}])
 

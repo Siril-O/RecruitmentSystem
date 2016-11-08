@@ -11,22 +11,33 @@ angular.module('Authentication')
 
             /* Dummy authentication for testing, uses $timeout to simulate api call
              ----------------------------------------------*/
-            $timeout(function () {
-                var response = { success: username === 'test' && password === 'test' };
-                if (!response.success) {
-                    response.message = 'Username or password is incorrect';
-                }
-                callback(response);
-            }, 1000);
+            // $timeout(function () {
+            //     var response = { success: username === 'test' && password === 'test' };
+            //     if (!response.success) {
+            //         response.message = 'Username or password is incorrect';
+            //     }
+            //     callback(response);
+            // }, 1000);
 
 
             /* Use this for real authentication
              ----------------------------------------------*/
-            //$http.post('/api/authenticate', { username: username, password: password })
-            //    .success(function (response) {
-            //        callback(response);
-            //    });
+            var authdata = Base64.encode(username + ':' + password);
+            var req = { method: 'POST',
+                        url: '/RecruitmentSystem/user/login',
+                        headers: {'Authorization': 'Basic ' + authdata}
+                      }
 
+        console.log(req);
+        $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+        $http(req).then(function successCallback(response) {
+                                 response.success = 'Success';
+                                 callback(response);
+                        },
+                        function errorCallback(response) {
+                          response.message = 'Wrong username or password';
+                          callback(response);
+                        });
         };
 
         service.SetCredentials = function (username, password) {
@@ -38,8 +49,6 @@ angular.module('Authentication')
                     authdata: authdata
                 }
             };
-
-         //   $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
             $cookieStore.put('globals', $rootScope.globals);
         };
 

@@ -1,5 +1,6 @@
 package ua.recruitment.system.configuration.utils;
 
+import org.apache.commons.lang.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import ua.recruitment.system.domain.user.Role;
 import ua.recruitment.system.domain.user.User;
 import ua.recruitment.system.repository.UserRepository;
 
@@ -21,7 +23,7 @@ import java.util.Collection;
 @Component("userDetailsService")
 public class DBUserDetailsService implements UserDetailsService {
 
-    private final Logger log = LoggerFactory.getLogger(DBUserDetailsService.class);
+    private final Logger LOG = LoggerFactory.getLogger(DBUserDetailsService.class);
 
     @Autowired
     private UserRepository userRepository;
@@ -33,7 +35,9 @@ public class DBUserDetailsService implements UserDetailsService {
         User userFromDatabase = userRepository.findByUserEmail(email);
 
         Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(userFromDatabase.getRole().toString());
+        Role userRole = userFromDatabase.getRole();
+        Validate.notNull(userRole, String.format("User with email:%s has no roles", email));
+        GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(userRole.toString());
         grantedAuthorities.add(grantedAuthority);
 
         return new org.springframework.security.core.userdetails.User(email, userFromDatabase.getPasswordHash(),

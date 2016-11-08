@@ -23,10 +23,12 @@ public class UserConverter implements Converter<User, UserDto> {
     @Override
     public UserDto convert(final User user, final UserDto userDto) {
         final PersonInfo personInfo = user.getPersonInfo();
-        userDto.setFirstName(personInfo.getFirstName());
-        userDto.setLastName(personInfo.getLastName());
         userDto.setEmail(user.getEmail());
-        userDto.setGender(user.getPersonInfo().getGender() != null ? user.getPersonInfo().getGender().toString() : null);
+        if(personInfo != null) {
+            userDto.setFirstName(personInfo.getFirstName());
+            userDto.setLastName(personInfo.getLastName());
+            userDto.setGender(user.getPersonInfo().getGender() != null ? user.getPersonInfo().getGender().toString() : null);
+        }
         return userDto;
     }
 

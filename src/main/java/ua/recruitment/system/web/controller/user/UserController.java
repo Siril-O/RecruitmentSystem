@@ -50,6 +50,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @ResponseBody
     public UserDto loginUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDto userDto = new UserDto();
