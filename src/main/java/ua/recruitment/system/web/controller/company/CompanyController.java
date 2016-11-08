@@ -1,11 +1,17 @@
 package ua.recruitment.system.web.controller.company;
 
+import ua.recruitment.system.domain.Company;
 import ua.recruitment.system.service.company.CompanyService;
+import ua.recruitment.system.web.controller.company.converter.CompanyToDtoConverter;
+import ua.recruitment.system.web.controller.company.dto.CompanyDto;
 import ua.recruitment.system.web.controller.company.dto.RegisterCompanyRequest;
+
+import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,14 +23,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("/company")
+@Secured("isAuthenticated()")
 public class CompanyController {
 
     @Autowired
     private CompanyService companySerice;
+    @Autowired
+    private CompanyToDtoConverter companyToDtoConverter;
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     public void registerCompany(@RequestBody @Valid RegisterCompanyRequest request) {
         companySerice.registerCompany(request.getName(), request.getDescription());
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    @ResponseBody
+    public List<CompanyDto> getCompanies() {
+        List<Company> companies = companySerice.getCompanies();
+        return companyToDtoConverter.convert(companies);
     }
 }

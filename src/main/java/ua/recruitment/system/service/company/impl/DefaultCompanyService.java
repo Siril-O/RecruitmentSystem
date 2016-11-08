@@ -4,6 +4,8 @@ import ua.recruitment.system.domain.Company;
 import ua.recruitment.system.repository.CompanyRepository;
 import ua.recruitment.system.service.company.CompanyService;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,4 +25,10 @@ public class DefaultCompanyService implements CompanyService {
         company.setName(name);
         companyRepository.create(company);
     }
+
+    @Override
+    public List<Company> getCompanies(){
+        return companyRepository.getList(0, 100);
+    }
+
 }

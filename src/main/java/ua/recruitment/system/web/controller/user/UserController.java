@@ -13,6 +13,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,5 +47,14 @@ public class UserController {
     @ResponseStatus(HttpStatus.CREATED)
     public void createApplicant(@RequestBody @Valid CreateUserRequest createUserDto) {
         userService.registerUser(createUserDto);
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public UserDto loginUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDto userDto = new UserDto();
+        userDto.setEmail(auth.getName());
+        userDto.setUserRole(auth.getAuthorities().iterator().next().getAuthority());
+        return userDto;
     }
 }

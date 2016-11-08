@@ -41,4 +41,9 @@ public class DefaultUserService implements UserService {
     public List<User> getAllUsers() {
         return userRepository.getList(0, 100);
     }
+
+    @Override
+    public User getUserByEmail(final String email) {
+        return userRepository.findByUserEmail(email);
+    }
 }

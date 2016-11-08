@@ -9,10 +9,16 @@
 <c:url var="angularUrl" value="/webjars/angularjs/1.4.8/angular.js" />
 <c:url var="angularResourceUrl" value="/webjars/angularjs/1.4.8/angular-resource.js" />
 <c:url var="angularRouteUrl" value="/webjars/angularjs/1.4.8/angular-route.js" />
+<c:url var="angularCookieUrl" value="/webjars/angular-cookies/1.4.8/angular-cookies.js" />
 
 <c:url var="appJsUrl" value="/resources/static/js/app.js" />
 <c:url var="controllerJsUrl" value="/resources/static/js/controller.js" />
 <c:url var="serviceJsUrl" value="/resources/static/js/service.js" />
+
+<c:url var="constantsJsUrl" value="/resources/static/js/constants.js" />
+<c:url var="authenticationControllerUrl" value="/resources/static/js/modules/authentication/controllers.js" />
+<c:url var="authenticationServiceUrl" value="/resources/static/js/modules/authentication/services.js" />
+
 <c:url var="bootstrapUrl" value="/webjars/bootstrap/3.3.6/css/bootstrap.css" />
 <c:url var="appCssUrl" value="/resources/static/css/app.css" />
 
@@ -25,8 +31,6 @@
     <link rel="stylesheet" href="${appCssUrl}">
 </head>
 <body>
-<div ng-controller="mainController">
-  <div ng-if="isAutorized">
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -35,16 +39,11 @@
     <ul class="nav navbar-nav">
       <li><a href="#/user">Users</a></li>
       <li><a href="#/user/create">Add new user</a></li>
-      <li><a href="#">Login</a></li>
+      <li><a ng-controller="LoginController" ng-click="logout()" href="#">Logout</a></li>
     </ul>
   </div>
 </nav>
 <div ng-view class ="container" class="ng-cloak"></div>
-  </div>
-  <div ng-if="!isAutorized">
-    <login></login>
-  </div>
-</div>
 <script src="${angularUrl}"></script>
 <script src="${angularResourceUrl}"></script>
 <script src="${angularRouteUrl}"></script>
@@ -52,5 +51,9 @@
 <script src="${controllerJsUrl}"></script>
 <script src="${serviceJsUrl}"></script>
 <link rel="stylesheet" href="${bootstrapUrl}">
+
+<script src="${authenticationControllerUrl}"></script>
+<script src="${authenticationServiceUrl}"></script>
+<script src="${angularCookieUrl}"></script>
 </body>
 </html>

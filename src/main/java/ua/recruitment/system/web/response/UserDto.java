@@ -1,5 +1,7 @@
 package ua.recruitment.system.web.response;
 
+import ua.recruitment.system.domain.user.Role;
+
 /**
  * Created by Kyrylo_Kovalchuk on 11/7/2016.
  */
@@ -9,6 +11,7 @@ public class UserDto {
     private String lastName;
     private String email;
     private String gender;
+    private String userRole;
 
     public String getFirstName() {
         return firstName;
@@ -40,5 +43,13 @@ public class UserDto {
 
     public void setGender(final String gender) {
         this.gender = gender;
+    }
+
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(final String userRole) {
+        this.userRole = userRole;
     }
 }

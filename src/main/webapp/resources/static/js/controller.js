@@ -1,4 +1,4 @@
-app.controller('userController', ['$scope','$http', function($scope, $http) {
+app.controller('UserController', ['$scope','$http', function($scope, $http) {
     $http.get('/RecruitmentSystem/user').then(
           function(response){
              $scope.users = response.data;
@@ -8,10 +8,10 @@ app.controller('userController', ['$scope','$http', function($scope, $http) {
     $scope.headingTitle = "All Users";
 }]);
 
-app.controller('createUserController', ['$scope','$http', function($scope, $http) {
+app.controller('CreateUserController', ['$scope','$http', function($scope, $http) {
 
     $scope.headingTitle = "Create Person";
-    $scope.roles = ['RECRUITER', 'APPLICANT'];
+    $scope.roles =['RECRUITER', 'APPLICANT'];
     $scope.submitCreateUserForm = function(){
             var req = {
              method: 'POST',
