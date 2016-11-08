@@ -6,6 +6,8 @@ import ua.recruitment.system.domain.user.Applicant;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,6 +32,7 @@ public class PositionApplication {
     @JoinColumn(name = "APPLICANT_ID")
     private Applicant applicant;
     private String curriculumVitae;
+    @Enumerated(EnumType.STRING)
     private PositionApplicationStatus status;
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date applyDate;

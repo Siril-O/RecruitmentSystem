@@ -11,6 +11,7 @@ app.controller('userController', ['$scope','$http', function($scope, $http) {
 app.controller('createUserController', ['$scope','$http', function($scope, $http) {
 
     $scope.headingTitle = "Create Person";
+    $scope.roles = ['RECRUITER', 'APPLICANT'];
     $scope.submitCreateUserForm = function(){
             var req = {
              method: 'POST',

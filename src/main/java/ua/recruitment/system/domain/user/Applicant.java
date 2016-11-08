@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
 
 /**
@@ -17,6 +19,7 @@ public class Applicant extends User {
 
     @OneToMany(mappedBy = "applicant")
     private List<PositionApplication> positionApplications;
+    @Enumerated(EnumType.STRING)
     private ApplicantStatus applicantStatus;
 
 

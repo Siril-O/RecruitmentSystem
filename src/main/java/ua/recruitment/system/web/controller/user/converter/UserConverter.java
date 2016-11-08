@@ -1,4 +1,4 @@
-package ua.recruitment.system.web.controller.converter;
+package ua.recruitment.system.web.controller.user.converter;
 
 import ua.recruitment.system.domain.user.PersonInfo;
 import ua.recruitment.system.domain.user.User;

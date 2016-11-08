@@ -25,14 +25,26 @@
     <link rel="stylesheet" href="${appCssUrl}">
 </head>
 <body>
-<h2>Recruiting system home page</h2>
-<div class="home-section">
-    <ul class="menu-list">
-        <li><a href="#/user">Users</a></li>
-        <li><a href="#/user/create">Add new user</a></li>
+<div ng-controller="mainController">
+  <div ng-if="isAutorized">
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Recruiting system</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="#/user">Users</a></li>
+      <li><a href="#/user/create">Add new user</a></li>
+      <li><a href="#">Login</a></li>
     </ul>
+  </div>
+</nav>
+<div ng-view class ="container" class="ng-cloak"></div>
+  </div>
+  <div ng-if="!isAutorized">
+    <login></login>
+  </div>
 </div>
-<div ng-view class ="container"></div>
 <script src="${angularUrl}"></script>
 <script src="${angularResourceUrl}"></script>
 <script src="${angularRouteUrl}"></script>

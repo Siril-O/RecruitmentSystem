@@ -30,7 +30,10 @@
                 <span ng-show="createUserForm.password.$error.required">This is a required field</span>
                 <span ng-show="createUserForm.password.$invalid">This field is invalid </span>
             </div>
-            <input type="submit" value="Create">
+
+            <label>Role:</label>
+            <select ng-model="user.role" ng-options="role for role in roles" class="selectpicker form-control " />
+            <input type="submit" value="Register" class="btn btn-primary">
         </form>
     </div>
 </div>

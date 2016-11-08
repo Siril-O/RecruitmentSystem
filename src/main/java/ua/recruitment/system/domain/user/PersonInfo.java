@@ -3,6 +3,8 @@ package ua.recruitment.system.domain.user;
 import java.util.Date;
 
 import javax.persistence.Embeddable;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -16,6 +18,7 @@ public class PersonInfo {
     private String lastName;
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date dateOfBirth;
+    @Enumerated(EnumType.STRING)
     private Gender gender;
     private String educationInfo;
 

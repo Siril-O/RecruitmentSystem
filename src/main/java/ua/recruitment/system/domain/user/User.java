@@ -2,6 +2,8 @@ package ua.recruitment.system.domain.user;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.Type;
+
 /**
  * Created by KIRIL on 06.11.2016.
  */
@@ -10,7 +12,7 @@ import javax.persistence.*;
         @NamedQuery(name = "User.find", query = "SELECT u FROM User AS u"),
         @NamedQuery(name = "User.getTotalCount", query = "SELECT count(u.id) FROM User AS u"),
         @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User AS u WHERE u.email = :email"),
-
+        @NamedQuery(name = "User.countByEmail", query = "SELECT COUNT(u.id) FROM User AS u WHERE u.email = :email"),
 })
 @Entity
 @Table(name = "puser", uniqueConstraints = @UniqueConstraint(columnNames = {"email"}))
@@ -25,6 +27,7 @@ public abstract class User {
     private String passwordHash;
     @Embedded
     private PersonInfo personInfo;
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     public Long getId() {

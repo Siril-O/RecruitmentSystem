@@ -226,13 +226,13 @@
         </dependency>
         <!-- END Bootstrap -->
 
-        <!-- Guava -->
+        <!-- Commons -->
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava-base</artifactId>
-            <version>r03</version>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.3</version>
         </dependency>
-        <!-- END GUAVA -->
+        <!-- END Commons -->
     </dependencies>
 
     <build>

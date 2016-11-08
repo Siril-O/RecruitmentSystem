@@ -1,14 +1,16 @@
 package ua.recruitment.system.repository.impl;
 
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import ua.recruitment.system.domain.user.User;
 import ua.recruitment.system.repository.UserRepository;
+
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import java.util.List;
+
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by KIRIL on 06.11.2016.
@@ -59,5 +61,12 @@ public class UserRepositoryImpl implements UserRepository {
         TypedQuery<User> query = entityManager.createNamedQuery("User.findByEmail", User.class);
         query.setParameter("email", email);
         return query.getSingleResult();
+    }
+
+    @Override
+    public long countByEmail(final String email) {
+        TypedQuery<Long> query = entityManager.createNamedQuery("User.countByEmail", Long.class);
+        query.setParameter("email", email);
+        return query.getSingleResult().longValue();
     }
 }
