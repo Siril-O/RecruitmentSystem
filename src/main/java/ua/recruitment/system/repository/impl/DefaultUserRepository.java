@@ -1,16 +1,18 @@
 package ua.recruitment.system.repository.impl;
 
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import ua.recruitment.system.domain.user.User;
-import ua.recruitment.system.repository.util.AbstractRepository;
 import ua.recruitment.system.repository.UserRepository;
+import ua.recruitment.system.repository.util.AbstractRepository;
 import ua.recruitment.system.repository.util.Paging;
+
+import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import java.util.List;
-import java.util.Optional;
+
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by KIRIL on 06.11.2016.
@@ -60,9 +62,31 @@ public class DefaultUserRepository extends AbstractRepository<User> implements U
     }
 
     @Override
+    public <T extends User> T findByUserEmail(final String email, final Class<T> tClass) {
+        TypedQuery<T> query = entityManager.createNamedQuery("findByEmailAndClass", tClass);
+        query.setParameter("email", email);
+        query.setParameter("class", tClass);
+        return query.getSingleResult();
+    }
+
+    @Override
     public long countByEmail(final String email) {
         Query query = entityManager.createNamedQuery("User.countByEmail");
         query.setParameter("email", email);
         return (long) query.getSingleResult();
+    }
+
+    @Override
+    public List<User> findByUserEmails(List<String> emails) {
+        TypedQuery<User> query = entityManager.createNamedQuery("User.findByEmails", User.class);
+        query.setParameter("emails", emails);
+        return query.getResultList();
+    }
+
+    @Override
+    public <T extends User> List<T> findByUserEmails(final List<String> emails, final Class<T> tClass) {
+        TypedQuery<T> query = entityManager.createNamedQuery("User.findByEmailsAndClass", tClass);
+        query.setParameter("emails", emails);
+        return query.getResultList();
     }
 }

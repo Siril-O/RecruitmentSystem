@@ -1,12 +1,5 @@
 package ua.recruitment.system.web.controller.company;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import ua.recruitment.system.domain.Company;
 import ua.recruitment.system.facade.CompanyFacade;
 import ua.recruitment.system.service.company.CompanyService;
@@ -14,8 +7,17 @@ import ua.recruitment.system.web.controller.company.converter.CompanyToDtoConver
 import ua.recruitment.system.web.controller.company.dto.CompanyDto;
 import ua.recruitment.system.web.controller.company.dto.RegisterCompanyRequest;
 
-import javax.validation.Valid;
 import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Created by Kyrylo_Kovalchuk on 11/8/2016.
@@ -34,6 +36,7 @@ public class CompanyController {
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
+    @Secured("hasRole(RECRUITER)")
     public void registerCompany(@RequestBody @Valid RegisterCompanyRequest request) {
         companyFacade.registerCompany(request);
     }
@@ -46,7 +49,7 @@ public class CompanyController {
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public void editCompany() {
-
+    public void editCompany(@RequestBody @Valid RegisterCompanyRequest request) {
+        companyFacade.updateCompany(request);
     }
 }

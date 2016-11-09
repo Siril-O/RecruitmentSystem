@@ -1,5 +1,7 @@
 package ua.recruitment.system.web.controller.company.dto;
 
+import java.util.List;
+
 import javax.validation.constraints.NotNull;
 
 /**
@@ -11,7 +13,7 @@ public class RegisterCompanyRequest {
     private String name;
     @NotNull
     private String description;
-    private String recruiterEmail;
+    private List<String> recruiterEmails;
 
     public String getName() {
         return name;
@@ -29,11 +31,11 @@ public class RegisterCompanyRequest {
         this.description = description;
     }
 
-    public String getRecruiterEmail() {
-        return recruiterEmail;
+    public List<String> getRecruiterEmails() {
+        return recruiterEmails;
     }
 
-    public void setRecruiterEmail(String recruiterEmail) {
-        this.recruiterEmail = recruiterEmail;
+    public void setRecruiterEmails(final List<String> recruiterEmails) {
+        this.recruiterEmails = recruiterEmails;
     }
 }

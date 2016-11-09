@@ -12,6 +12,7 @@ import ua.recruitment.system.domain.position.PositionStatus;
 import ua.recruitment.system.facade.PositionFacade;
 import ua.recruitment.system.service.position.PositionService;
 import ua.recruitment.system.web.controller.position.converter.PositionToDtoConverter;
+import ua.recruitment.system.web.controller.position.dto.ApplyPositionRequest;
 import ua.recruitment.system.web.controller.position.dto.CreatePositionRequest;
 import ua.recruitment.system.web.controller.position.dto.PositionDto;
 
@@ -44,5 +45,10 @@ public class PositionController {
     @RequestMapping(method = RequestMethod.POST)
     public void createPosition(@RequestBody CreatePositionRequest request) {
         positionFacade.createPosition(request);
+    }
+
+    @RequestMapping(value = "/apply", method = RequestMethod.PUT)
+    public void applyOnPisition(@RequestBody ApplyPositionRequest applyPositionRequest){
+        positionFacade.applyApplicantOnPosition(applyPositionRequest);
     }
 }

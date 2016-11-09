@@ -16,4 +16,11 @@ public interface UserService {
 
     User getUserByEmail(String email);
 
-    }
+    <T extends User> T getUserByEmail(String email, Class<T> tClass);
+
+    List<User> getUsersByEmails(List<String> emails);
+
+    <T extends User> List<T> getUsersByEmails(List<String> emails, Class<T> userTypeClass);
+
+    void assignRecruiterToCompany(String email, String companyName);
+}

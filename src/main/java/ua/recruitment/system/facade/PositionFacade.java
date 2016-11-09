@@ -1,5 +1,6 @@
 package ua.recruitment.system.facade;
 
+import ua.recruitment.system.web.controller.position.dto.ApplyPositionRequest;
 import ua.recruitment.system.web.controller.position.dto.CreatePositionRequest;
 
 /**
@@ -7,4 +8,6 @@ import ua.recruitment.system.web.controller.position.dto.CreatePositionRequest;
  */
 public interface PositionFacade {
     void createPosition(CreatePositionRequest createPositionRequest);
+
+    void applyApplicantOnPosition(ApplyPositionRequest applyPositionRequest);
 }

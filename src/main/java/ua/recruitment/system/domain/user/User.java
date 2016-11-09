@@ -12,6 +12,9 @@ import org.hibernate.annotations.Type;
         @NamedQuery(name = "User.find", query = "SELECT u FROM User AS u"),
         @NamedQuery(name = "User.getTotalCount", query = "SELECT count(u.id) FROM User AS u"),
         @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User AS u WHERE u.email = :email"),
+        @NamedQuery(name = "User.findByEmailAndClass", query = "SELECT u FROM User AS u WHERE u.email = :email AND u.class = :class"),
+        @NamedQuery(name = "User.findByEmails", query = "SELECT u FROM User AS u WHERE u.email IN (:emails)"),
+        @NamedQuery(name = "User.findByEmailsAndClass", query = "SELECT u FROM User AS u WHERE u.email IN (:emails) AND u.class = :class"),
         @NamedQuery(name = "User.countByEmail", query = "SELECT COUNT(u.id) FROM User AS u WHERE u.email = :email"),
 })
 @Entity

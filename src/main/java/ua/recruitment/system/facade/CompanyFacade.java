@@ -8,4 +8,6 @@ import ua.recruitment.system.web.controller.company.dto.RegisterCompanyRequest;
 public interface CompanyFacade {
 
     void registerCompany(RegisterCompanyRequest registerCompanyRequest);
+
+    void updateCompany(RegisterCompanyRequest registerCompanyRequest);
 }
