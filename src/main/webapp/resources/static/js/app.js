@@ -14,6 +14,10 @@ app.config(function($routeProvider){
             templateUrl: 'resources/static/views/createUser.html',
             controller: 'CreateUserController'
         })
+        .when('/position/create', {
+            templateUrl: 'resources/static/views/createPosition.html',
+            controller: 'CreatePositionController'
+        })
         .when('/login', {
             templateUrl: 'resources/static/js/modules/authentication/views/login.html',
             controller: 'LoginController'

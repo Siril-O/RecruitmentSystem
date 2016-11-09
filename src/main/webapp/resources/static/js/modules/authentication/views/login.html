@@ -1,4 +1,5 @@
-﻿<div ng-show="error" class="alert alert-danger">{{error}}</div>
+﻿<h3>Sign In or <a href="#/user/register" class="btn btn-primary">Sign Up</a></h3>
+<div ng-show="error" class="alert alert-danger">{{error}}</div>
 <form name="form" ng-submit="login()" role="form">
     <div class="form-group">
         <label for="username">Username</label>
@@ -13,6 +14,7 @@
         <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
     </div>
     <div class="form-actions">
-        <button type="submit" ng-disabled="form.$invalid" class="btn btn-danger">Login</button>
+        <button type="submit" ng-disabled="form.$invalid" class="btn btn-danger">Sign in</button>
     </div>
 </form>
+

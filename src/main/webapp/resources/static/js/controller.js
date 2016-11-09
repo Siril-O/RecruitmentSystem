@@ -28,3 +28,21 @@ app.controller('CreateUserController', ['$scope','$http', function($scope, $http
                         });
     }
 }]);
+
+app.controller('CreatePositionController', ['$scope','$http', function($scope, $http) {
+
+    $scope.headingTitle = "Create position";
+
+    $scope.createPosition = function(){
+      var req = { method: 'POST',
+                 url: '/RecruitmentSystem/user',
+                 headers: {'Content-Type': 'application/json'},
+                 data: $scope.user
+                }
+      console.log(req);
+      $http(req).then(function successCallback(response) {$scope.message = 'Success'}, function errorCallback(response) {
+                          $scope.message = response;
+                          console.log(response);
+                        });
+    }
+}]);
