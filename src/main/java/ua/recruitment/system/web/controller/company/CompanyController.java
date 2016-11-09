@@ -49,6 +49,7 @@ public class CompanyController {
     }
 
     @RequestMapping(method = RequestMethod.PUT)
+    @ResponseBody
     public void editCompany(@RequestBody @Valid RegisterCompanyRequest request) {
         companyFacade.updateCompany(request);
     }

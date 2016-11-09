@@ -62,6 +62,7 @@ public class UserController {
 
     @RequestMapping(value = "/company/assign", method = RequestMethod.PUT)
     @Secured("hasRole(RECRUITER)")
+    @ResponseBody
     public void assignRecruiterToCompany(@RequestParam String email, @RequestParam String companyName) {
         assignRecruiterToCompany(email, companyName);
     }

@@ -38,8 +38,9 @@
     </div>
     <ul class="nav navbar-nav">
       <li><a href="#/user">Users</a></li>
-      <li><a href="#/position/create">Create Position</a></li>
-      <li><a ng-controller="LoginController" ng-click="logout()" href="#">Logout</a></li>
+      <li><a href="#/position">Positions</a></li>
+    <li><a href="#/company">Companies</a></li>
+    <li><a ng-controller="LoginController" ng-click="logout()" href="#">Logout</a></li>
     </ul>
   </div>
 </nav>

@@ -1,0 +1,32 @@
+<div ng-show="error" class="alert alert-danger">
+    <strong>{{error}}</strong>
+</div>
+<div ng-show="message" class="alert alert-success">
+    <strong>{{message}}</strong>
+</div>
+<form name="form" ng-submit="createPosition(position)" role="form">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <i class="fa fa-key"></i>
+        <input type="text" name="name" id="name" class="form-control" ng-model="position.name" required/>
+        <span ng-show="form.name.$dirty && form.name.$error.required" class="help-block">Name is required</span>
+    </div>
+    <div class="form-group">
+        <label for="company">Company</label>
+        <i class="fa fa-key"></i>
+        <select ng-controller="CompanyController as ctrl" ng-model="position.companyName"
+                ng-options="company.name for company in companies" id="company" name="company"
+                class="selectpicker form-control " required></select>
+        <span ng-show="form.company.$dirty && form.company.$error.required" class="help-block">Company is required</span>
+    </div>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <i class="fa fa-lock"></i>
+        <textarea ng-model="position.description" name="description" id="description" cols="40" rows="3"
+                  required class="form-control"></textarea></p>
+        <span ng-show="form.description.$dirty && form.description.$error.required" class="help-block">Description is required</span>
+    </div>
+    <div class="form-actions">
+        <button type="submit" ng-disabled="form.$invalid" class="btn btn-danger">Create</button>
+    </div>
+</form>

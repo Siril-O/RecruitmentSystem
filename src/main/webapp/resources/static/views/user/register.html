@@ -1,53 +1,64 @@
 <div class="section">
     <h3>{{headingTitle}}</h3>
-    <label ng-model="message"></label>
+    <div ng-show="error" class="alert alert-danger">
+        <strong>{{error}}</strong>
+    </div>
+    <div ng-show="message" class="alert alert-success">
+        <strong>{{message}}</strong>
+    </div>
     <div class="gallery-section">
         <form name="createUser" ng-submit="submitCreateUserForm()" name="createUserForm">
             <label>First Name:</label>
-            <input type="text" ng-model="user.firstName" id="firstName" class="form-control input-sm" placeholder="Enter your first name" required/>
+            <input type="text" ng-model="user.firstName" id="firstName" class="form-control input-sm"
+                   placeholder="Enter your first name" required/>
             <div class="has-error" ng-show="createUserForm.$dirty">
                 <span ng-show="createUserForm.firstName.$error.required">This is a required field</span>
                 <span ng-show="createUserForm.firstName.$invalid">This field is invalid </span>
             </div>
 
             <label>Last Name:</label>
-            <input type="text" ng-model="user.lastName" id="lastName" class="form-control input-sm" placeholder="Enter your last name" required/>
+            <input type="text" ng-model="user.lastName" id="lastName" class="form-control input-sm"
+                   placeholder="Enter your last name" required/>
             <div class="has-error" ng-show="createUserForm.$dirty">
                 <span ng-show="createUserForm.lastName.$error.required">This is a required field</span>
                 <span ng-show="createUserForm.lastName.$invalid">This field is invalid </span>
             </div>
 
-            <div style="margin-bottom:10px">
-            <label>Gender:</label>
-            <select ng-model="user.gender" ng-options="gender for gender in genders" class="selectpicker form-control " required/><br>
-            </div>
+                <label>Gender:</label>
+                <select ng-model="user.gender" ng-options="gender for gender in genders"
+                        class="selectpicker form-control " required></select>
 
             <label>Email:</label>
-            <input type="email" ng-model="user.email" id="email" class="form-control input-sm" placeholder="Enter your email name" required/>
+            <input type="email" ng-model="user.email" id="email" class="form-control input-sm"
+                   placeholder="Enter your email name" required/>
             <div class="has-error" ng-show="createUserForm.$dirty">
                 <span ng-show="createUserForm.email.$error.required">This is a required field</span>
                 <span ng-show="createUserForm.email.$invalid">This field is invalid </span>
             </div>
 
             <label>Password:</label>
-            <input type="password" ng-model="user.password" id="password" class="form-control input-sm" placeholder="Enter your password name" required/>
+            <input type="password" ng-model="user.password" id="password" class="form-control input-sm"
+                   placeholder="Enter your password name" required/>
             <div class="has-error" ng-show="createUserForm.$dirty">
-                <span ng-show="createUserForm.password.$error.required" class="help-block">This is a required field</span>
+                <span ng-show="createUserForm.password.$error.required"
+                      class="help-block">This is a required field</span>
                 <span ng-show="createUserForm.password.$invalid">This field is invalid </span>
             </div>
 
             <label>Date of Birth:</label>
             <input type="date" ng-model="user.dateOfBirth" id="bday" class="form-control input-sm"
-                   placeholder="Enter your first name"  max="{{date}}" required />
+                   placeholder="Enter your first name" max="{{date}}" required/>
             <div class="has-error" ng-show="createUserForm.$dirty">
                 <span ng-show="createUserForm.bday.$error.required" class="help-block">This is a required field</span>
                 <span ng-show="createUserForm.bday.$invalid" class="help-block">This field is invalid </span>
             </div>
 
             <div>
-            <label>Select Role:</label>
-            <select ng-model="user.role" ng-options="role for role in roles" class="selectpicker form-control " required/><br>
+                <label>Select Role:</label>
+                <select ng-model="user.role" ng-options="role for role in roles" class="selectpicker form-control "
+                        required></select>
             </div>
+            <br>
 
             <input type="submit" value="Register" class="btn btn-primary">
 
