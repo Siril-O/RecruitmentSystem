@@ -49,7 +49,7 @@ public class DefaultPositionFacade implements PositionFacade {
     }
 
     @Override
-    public void applyApplicantOnPosition(final ApplyPositionRequest request) {
+    public void applyForPosition(final ApplyPositionRequest request) {
         Applicant applicant = userService.getUserByEmail(request.getApplicantEmail(), Applicant.class);
         Position position = positionService.findPositionByCode(request.getPositionCode());
         PositionApplication positionApplication = new PositionApplication();

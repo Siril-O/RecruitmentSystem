@@ -3,7 +3,7 @@ package ua.recruitment.system.web.controller.company;
 import ua.recruitment.system.domain.Company;
 import ua.recruitment.system.facade.CompanyFacade;
 import ua.recruitment.system.service.company.CompanyService;
-import ua.recruitment.system.web.controller.company.converter.CompanyToDtoConverter;
+import ua.recruitment.system.facade.converter.CompanyToDtoConverter;
 import ua.recruitment.system.web.controller.company.dto.CompanyDto;
 import ua.recruitment.system.web.controller.company.dto.RegisterCompanyRequest;
 

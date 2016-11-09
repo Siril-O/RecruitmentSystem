@@ -1,4 +1,4 @@
-package ua.recruitment.system.web.controller.user.converter;
+package ua.recruitment.system.facade.converter;
 
 import ua.recruitment.system.domain.user.PersonInfo;
 import ua.recruitment.system.domain.user.User;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * Created by Kyrylo_Kovalchuk on 11/7/2016.
  */
 @Component
-public class UserConverter implements Converter<User, UserDto> {
+public class UserToDtoConverter implements Converter<User, UserDto> {
 
     @Override
     public UserDto convert(final User input) {

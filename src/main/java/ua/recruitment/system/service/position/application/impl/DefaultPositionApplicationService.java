@@ -1,8 +1,11 @@
 package ua.recruitment.system.service.position.application.impl;
 
 import ua.recruitment.system.domain.PositionApplication;
+import ua.recruitment.system.domain.PositionApplicationStatus;
 import ua.recruitment.system.repository.PositionApplicationRepository;
 import ua.recruitment.system.service.position.application.PositionApplicationService;
+
+import java.util.List;
 
 import org.apache.commons.lang.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +24,11 @@ public class DefaultPositionApplicationService implements PositionApplicationSer
     public void create(final PositionApplication positionApplication) {
         Validate.notNull(positionApplication);
         positionApplicationRepository.create(positionApplication);
+    }
+
+    @Override
+    public List<PositionApplication> getFilteredPositionApplications(List<String> positionCodes, List<String> emails,
+                                                                     List<PositionApplicationStatus> statuses) {
+        return positionApplicationRepository.getFilteredPositionApplications(positionCodes, emails, statuses);
     }
 }

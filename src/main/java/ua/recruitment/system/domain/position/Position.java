@@ -1,9 +1,11 @@
 package ua.recruitment.system.domain.position;
 
 import ua.recruitment.system.domain.Company;
+import ua.recruitment.system.domain.PositionApplication;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by KIRIL on 06.11.2016.

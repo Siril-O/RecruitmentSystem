@@ -1,4 +1,4 @@
-package ua.recruitment.system.web.controller.user.converter;
+package ua.recruitment.system.facade.converter;
 
 import java.util.List;
 

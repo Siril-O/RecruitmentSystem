@@ -9,5 +9,5 @@ import ua.recruitment.system.web.controller.position.dto.CreatePositionRequest;
 public interface PositionFacade {
     void createPosition(CreatePositionRequest createPositionRequest);
 
-    void applyApplicantOnPosition(ApplyPositionRequest applyPositionRequest);
+    void applyForPosition(ApplyPositionRequest applyPositionRequest);
 }

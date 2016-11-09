@@ -1,9 +1,8 @@
-package ua.recruitment.system.web.controller.company.converter;
+package ua.recruitment.system.facade.converter;
 
 import org.springframework.stereotype.Component;
 import ua.recruitment.system.domain.Company;
 import ua.recruitment.system.web.controller.company.dto.CompanyDto;
-import ua.recruitment.system.web.controller.user.converter.Converter;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,7 +14,7 @@ import java.util.stream.Collectors;
 public class CompanyToDtoConverter implements Converter<Company, CompanyDto> {
     @Override
     public CompanyDto convert(final Company input) {
-        return convert(new Company());
+        return convert(input, new CompanyDto());
     }
 
     @Override
