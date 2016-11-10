@@ -1,5 +1,7 @@
 package ua.recruitment.system.web.controller.common;
 
+import ua.recruitment.system.service.exception.UniqueConstraintViolation;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,6 +18,14 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  */
 @ControllerAdvice
 public class ExceptionHandlerController {
+
+    @ExceptionHandler({UniqueConstraintViolation.class})
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ResponseBody
+    public ErrorInfo handelUniquConstrainViolation(UniqueConstraintViolation exception) {
+        return new ErrorInfo(exception.getMessage(), exception);
+    }
+
 
     @ExceptionHandler({MethodArgumentNotValidException.class})
     @ResponseBody

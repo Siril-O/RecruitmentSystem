@@ -38,7 +38,7 @@ app.config(function ($routeProvider) {
             templateUrl: 'resources/static/views/position/list.html',
             controller: 'PositionController'
         })
-        .otherwise({redirectTo: '/login'});
+        .otherwise({redirectTo: '/'});
 })
 
     .run(['$rootScope', '$location', '$cookieStore', '$http',

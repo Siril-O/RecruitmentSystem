@@ -5,6 +5,7 @@ import ua.recruitment.system.domain.user.Recruiter;
 import ua.recruitment.system.domain.user.User;
 import ua.recruitment.system.repository.UserRepository;
 import ua.recruitment.system.service.company.CompanyService;
+import ua.recruitment.system.service.exception.UniqueConstraintViolation;
 import ua.recruitment.system.service.user.UserFactory;
 import ua.recruitment.system.service.user.UserService;
 import ua.recruitment.system.web.dto.CreateUserRequest;
@@ -39,7 +40,9 @@ public class DefaultUserService implements UserService {
     public void registerUser(CreateUserRequest createUserRequest) {
         final String email = createUserRequest.getEmail();
         final long usersWithEmail = userRepository.countByEmail(email);
-        Validate.isTrue(usersWithEmail < 1, String.format(USER_WITH_EMAIL_ALREADY_EXIST, email));
+        if (usersWithEmail > 0) {
+            throw new UniqueConstraintViolation(String.format(USER_WITH_EMAIL_ALREADY_EXIST, email));
+        }
         User user = userFactory.createUser(createUserRequest);
         userRepository.create(user);
     }
