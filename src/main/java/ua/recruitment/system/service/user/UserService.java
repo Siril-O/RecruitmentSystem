@@ -1,7 +1,7 @@
 package ua.recruitment.system.service.user;
 
 import ua.recruitment.system.domain.user.User;
-import ua.recruitment.system.web.dto.CreateUserRequest;
+import ua.recruitment.system.web.controller.user.dto.CreateUserRequest;
 
 import java.util.List;
 

@@ -3,8 +3,8 @@ package ua.recruitment.system.web.controller.user;
 import ua.recruitment.system.domain.user.User;
 import ua.recruitment.system.service.user.UserService;
 import ua.recruitment.system.facade.converter.UserToDtoConverter;
-import ua.recruitment.system.web.dto.CreateUserRequest;
-import ua.recruitment.system.web.response.UserDto;
+import ua.recruitment.system.web.controller.user.dto.CreateUserRequest;
+import ua.recruitment.system.web.controller.user.dto.UserDto;
 
 import java.util.List;
 

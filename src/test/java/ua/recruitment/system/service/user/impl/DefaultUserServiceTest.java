@@ -2,8 +2,9 @@ package ua.recruitment.system.service.user.impl;
 
 import ua.recruitment.system.domain.user.User;
 import ua.recruitment.system.repository.UserRepository;
+import ua.recruitment.system.service.exception.UniqueConstraintViolation;
 import ua.recruitment.system.service.user.UserFactory;
-import ua.recruitment.system.web.dto.CreateUserRequest;
+import ua.recruitment.system.web.controller.user.dto.CreateUserRequest;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -38,12 +39,9 @@ public class DefaultUserServiceTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    @Test
+    @Test(expected = UniqueConstraintViolation.class)
     public void shouldNotRegisterUserWhenEmailIsExist() {
         when(userRepository.countByEmail(EMAIL)).thenReturn(1L);
-
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(String.format(USER_WITH_EMAIL_ALREADY_EXIST, EMAIL));
 
         testingInstance.registerUser(givenUserRequest());
     }

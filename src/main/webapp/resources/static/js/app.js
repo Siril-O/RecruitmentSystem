@@ -38,11 +38,15 @@ app.config(function ($routeProvider) {
             templateUrl: 'resources/static/views/position/list.html',
             controller: 'PositionController'
         })
+        .when('/position/apply', {
+            templateUrl: 'resources/static/views/position/apply.html',
+            controller: 'ApplyPositionController'
+        })
         .otherwise({redirectTo: '/'});
 })
 
-    .run(['$rootScope', '$location', '$cookieStore', '$http',
-        function ($rootScope, $location, $cookieStore, $http) {
+    .run(['$rootScope', '$location', '$cookieStore',
+        function ($rootScope, $location, $cookieStore) {
             // keep user logged in after page refresh
             $rootScope.globals = $cookieStore.get('globals') || {};
 
@@ -53,3 +57,6 @@ app.config(function ($routeProvider) {
                 }
             });
         }]);
+    app.constant('ROLES', ['RECRUITER', 'APPLICANT']);
+
+

@@ -4,8 +4,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ua.recruitment.system.domain.position.Position;
 import ua.recruitment.system.domain.position.PositionStatus;
-import ua.recruitment.system.repository.util.AbstractRepository;
 import ua.recruitment.system.repository.PositionRepository;
+import ua.recruitment.system.repository.util.AbstractRepository;
 import ua.recruitment.system.repository.util.Paging;
 
 import javax.persistence.TypedQuery;

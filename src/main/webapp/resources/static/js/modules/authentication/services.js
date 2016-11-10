@@ -3,11 +3,11 @@
 angular.module('Authentication')
 
     .factory('AuthenticationService',
-        ['Base64', '$http', '$cookieStore', '$rootScope', '$timeout',
-            function (Base64, $http, $cookieStore, $rootScope, $timeout) {
+        ['Base64', '$http', '$cookieStore', '$rootScope', '$q',
+            function (Base64, $http, $cookieStore, $rootScope, $q) {
                 var service = {};
 
-                service.Login = function (username, password, callback) {
+                service.login = function (username, password) {
                     var authdata = Base64.encode(username + ':' + password);
                     var req = {
                         method: 'POST',
@@ -16,34 +16,34 @@ angular.module('Authentication')
                             'Authorization': 'Basic ' + authdata,
                             'X-Requested-With': 'XMLHttpRequest'
                         }
-                    }
-
-                    console.log(req);
-                    $http(req).then(function successCallback(response) {
-                            response.success = 'Success';
-                            callback(response);
-                        },
-                        function errorCallback(response) {
-                            response.message = 'Wrong username or password';
-                            callback(response);
-                        });
+                    };
+                    return $http(req).then(function successCallback(response) {
+                        return response.data;
+                    }, function errorCallback(errResponse) {
+                        return $q.reject(errResponse);
+                    });
                 };
 
-                service.SetCredentials = function (username, password) {
-                    var authdata = Base64.encode(username + ':' + password);
+                service.setCredentials = function (user, password) {
+                    var authdata = Base64.encode(user.email + ':' + password);
 
                     $rootScope.globals = {
                         currentUser: {
-                            username: username,
-                            authdata: authdata
+                            email: user.email,
+                            authdata: authdata,
+                            userRole: user.userRole
                         }
                     };
                     $cookieStore.put('globals', $rootScope.globals);
                 };
 
-                service.ClearCredentials = function () {
+                service.clearCredentials = function () {
                     $rootScope.globals = {};
                     $cookieStore.remove('globals');
+                };
+
+                service.getCurrentUser = function () {
+                    return $rootScope.globals.currentUser;
                 };
 
                 return service;

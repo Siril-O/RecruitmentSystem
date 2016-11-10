@@ -1,5 +1,6 @@
 package ua.recruitment.system.web.controller.position.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import ua.recruitment.system.domain.position.PositionStatus;
 import ua.recruitment.system.web.controller.company.dto.CompanyDto;
 
@@ -14,6 +15,7 @@ public class PositionDto {
     private String code;
     private CompanyDto company;
     private PositionStatus positionStatus;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date dateOfCreation;
 
     public String getName() {

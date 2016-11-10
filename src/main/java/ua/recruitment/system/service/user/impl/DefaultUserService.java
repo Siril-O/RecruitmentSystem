@@ -8,7 +8,7 @@ import ua.recruitment.system.service.company.CompanyService;
 import ua.recruitment.system.service.exception.UniqueConstraintViolation;
 import ua.recruitment.system.service.user.UserFactory;
 import ua.recruitment.system.service.user.UserService;
-import ua.recruitment.system.web.dto.CreateUserRequest;
+import ua.recruitment.system.web.controller.user.dto.CreateUserRequest;
 
 import java.util.List;
 import java.util.Optional;

@@ -5,7 +5,7 @@ import ua.recruitment.system.domain.user.PersonInfo;
 import ua.recruitment.system.domain.user.Recruiter;
 import ua.recruitment.system.domain.user.Role;
 import ua.recruitment.system.domain.user.User;
-import ua.recruitment.system.web.dto.CreateUserRequest;
+import ua.recruitment.system.web.controller.user.dto.CreateUserRequest;
 
 import org.apache.commons.lang.Validate;
 import org.slf4j.Logger;

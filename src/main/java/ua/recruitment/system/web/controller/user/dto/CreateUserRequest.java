@@ -1,4 +1,4 @@
-package ua.recruitment.system.web.dto;
+package ua.recruitment.system.web.controller.user.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import ua.recruitment.system.domain.user.ApplicantStatus;

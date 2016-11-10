@@ -14,7 +14,7 @@ import java.util.List;
         @NamedQuery(name = "Position.find", query = "SELECT p FROM Position AS p"),
         @NamedQuery(name = "Position.findByCode", query = "SELECT p FROM Position AS p WHERE p.code=:code"),
         @NamedQuery(name = "Position.getTotalCount", query = "SELECT count(p.id) FROM Position AS p"),
-        @NamedQuery(name = "Position.findInStatuses", query = "SELECT p FROM Position AS p WHERE p.positionStatus IN :statuses"),
+        @NamedQuery(name = "Position.findInStatuses", query = "SELECT p FROM Position AS p WHERE p.positionStatus IN (:statuses)"),
 })
 
 

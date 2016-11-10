@@ -2,7 +2,7 @@ package ua.recruitment.system.facade.converter;
 
 import ua.recruitment.system.domain.user.PersonInfo;
 import ua.recruitment.system.domain.user.User;
-import ua.recruitment.system.web.response.UserDto;
+import ua.recruitment.system.web.controller.user.dto.UserDto;
 
 import java.util.List;
 import java.util.stream.Collectors;

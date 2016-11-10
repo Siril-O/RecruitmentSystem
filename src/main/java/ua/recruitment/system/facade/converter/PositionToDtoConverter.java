@@ -34,7 +34,7 @@ public class PositionToDtoConverter implements Converter<Position, PositionDto> 
         CompanyDto companyDto = companyToDtoConverter.convert(input.getCompany());
         output.setCompany(companyDto);
         output.setCode(input.getCode());
-        return null;
+        return output;
     }
 
     @Override

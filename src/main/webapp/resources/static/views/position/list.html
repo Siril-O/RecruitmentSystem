@@ -3,13 +3,18 @@
     <div ng-show="error" class="alert alert-danger">
         <strong>{{error}}</strong>
     </div>
-    <h3>Create new Position: <a href="#/position/create" class="btn btn-primary">Add position</a></h3>
-    <form name="form" ng-submit="changeFetchedStatuses(positionStatus)">
+    <div id="addPositionContainer" ng-show="isAuthorisedToAddPositions()">
+    <h3>Create new Position: <a href="#/position/create" class="btn btn-primary" >Add
+        position</a></h3>
+    </div>
+    <div id="statusesFilter" ng-show="isAuthorisedToAddPositions()">
+    <form name="form" ng-submit="changeFetchedStatuses()">
         <legend>Filter positions by statuses</legend>
         <label for="status">PositionStatus</label>
         <select id="status" ng-model="positionStatus" ng-options="positionStatus for positionStatus in positionStatuses"
-                class="selectpicker form-control " required></select>
+                class="selectpicker form-control " required ng-click="changeFetchedStatuses(positionStatus)"></select>
     </form>
+    </div>
     <br>
     <div>
         <div class="panel panel-default">
@@ -21,6 +26,7 @@
                     <th>Position</th>
                     <th>Description</th>
                     <th>Created</th>
+                    <th></th>
                     </thead>
                     <tbody>
                     <tr ng-repeat="position in positions">
@@ -28,6 +34,8 @@
                         <td>{{position.name}}</td>
                         <td>{{position.description}}</td>
                         <td>{{position.dateOfCreation}}</td>
+                        <td><a ng-show="isAuthorisedToApplyPositions()" href="#/position/apply"
+                               ng-click="setPosition(position)" class="btn btn-primary">Apply</a></td>
                     </tr>
                     </tbody>
                 </table>

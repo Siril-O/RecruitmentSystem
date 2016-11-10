@@ -1,0 +1,21 @@
+<div ng-show="error" class="alert alert-danger">
+    <strong>{{error}}</strong>
+</div>
+<div ng-show="message" class="alert alert-success">
+    <strong>{{message}}</strong>
+</div>
+Position name:{{position.name}}
+Company name:{{position.company.name}}
+Position description:{{position.description}}
+<form name="form" ng-submit="applyForPosition(applyPosition)" role="form">
+    <div class="form-group">
+        <label for="description">Description</label>
+        <i class="fa fa-lock"></i>
+        <textarea ng-model="applyPosition.curriculumVitae" name="description" id="description" cols="40" rows="3"
+                  required class="form-control"></textarea></p>
+        <span ng-show="form.description.$dirty && form.description.$error.required" class="help-block">Description is required</span>
+    </div>
+    <div class="form-actions">
+        <button type="submit" ng-disabled="form.$invalid" class="btn btn-danger">Apply</button>
+    </div>
+</form>

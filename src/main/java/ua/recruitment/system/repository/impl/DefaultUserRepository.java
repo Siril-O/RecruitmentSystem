@@ -63,7 +63,7 @@ public class DefaultUserRepository extends AbstractRepository<User> implements U
 
     @Override
     public <T extends User> T findByUserEmail(final String email, final Class<T> tClass) {
-        TypedQuery<T> query = entityManager.createNamedQuery("findByEmailAndClass", tClass);
+        TypedQuery<T> query = entityManager.createNamedQuery("User.findByEmailAndClass", tClass);
         query.setParameter("email", email);
         query.setParameter("class", tClass);
         return query.getSingleResult();

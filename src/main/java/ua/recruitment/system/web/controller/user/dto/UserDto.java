@@ -1,6 +1,4 @@
-package ua.recruitment.system.web.response;
-
-import ua.recruitment.system.domain.user.Role;
+package ua.recruitment.system.web.controller.user.dto;
 
 /**
  * Created by Kyrylo_Kovalchuk on 11/7/2016.

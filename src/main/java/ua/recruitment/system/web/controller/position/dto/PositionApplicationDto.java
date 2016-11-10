@@ -1,7 +1,7 @@
 package ua.recruitment.system.web.controller.position.dto;
 
 import ua.recruitment.system.domain.PositionApplicationStatus;
-import ua.recruitment.system.web.response.UserDto;
+import ua.recruitment.system.web.controller.user.dto.UserDto;
 
 import java.util.Date;
 
