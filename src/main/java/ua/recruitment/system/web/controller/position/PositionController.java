@@ -48,6 +48,7 @@ public class PositionController {
     }
 
     @RequestMapping(value = "/apply", method = RequestMethod.PUT)
+    @ResponseBody
     public void applyForPosition(@RequestBody ApplyPositionRequest applyPositionRequest) {
         positionFacade.applyForPosition(applyPositionRequest);
     }

@@ -20,6 +20,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public class DefaultUserRepository extends AbstractRepository<User> implements UserRepository {
 
+    private static final String FIND_USER_BY_EMAIL_QUERY = "SELECT u FROM %s AS u WHERE u.email = :email";
+    private static final String FIND_USERS_BY_EMAILS_QUERY = "SELECT u FROM %s AS u WHERE u.emails IN (:emails)";
+
     @Override
     @Transactional
     public void create(User entity) {
@@ -63,9 +66,9 @@ public class DefaultUserRepository extends AbstractRepository<User> implements U
 
     @Override
     public <T extends User> T findByUserEmail(final String email, final Class<T> tClass) {
-        TypedQuery<T> query = entityManager.createNamedQuery("User.findByEmailAndClass", tClass);
+        String queryString = String.format(FIND_USER_BY_EMAIL_QUERY, tClass.getSimpleName());
+        TypedQuery<T> query = entityManager.createQuery(queryString, tClass);
         query.setParameter("email", email);
-        query.setParameter("class", tClass);
         return query.getSingleResult();
     }
 
@@ -85,7 +88,8 @@ public class DefaultUserRepository extends AbstractRepository<User> implements U
 
     @Override
     public <T extends User> List<T> findByUserEmails(final List<String> emails, final Class<T> tClass) {
-        TypedQuery<T> query = entityManager.createNamedQuery("User.findByEmailsAndClass", tClass);
+        String queryString = String.format(FIND_USERS_BY_EMAILS_QUERY, tClass.getSimpleName());
+        TypedQuery<T> query = entityManager.createQuery(queryString, tClass);
         query.setParameter("emails", emails);
         return query.getResultList();
     }
