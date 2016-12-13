@@ -1,5 +1,7 @@
 package ua.recruitment.system.web.controller.position.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import ua.recruitment.system.domain.PositionApplicationStatus;
 import ua.recruitment.system.web.controller.user.dto.UserDto;
 
@@ -8,6 +10,7 @@ import java.util.Date;
 /**
  * Created by Kyrylo_Kovalchuk on 11/9/2016.
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PositionApplicationDto {
 
     private String code;
@@ -15,7 +18,9 @@ public class PositionApplicationDto {
     private UserDto applicant;
     private String curriculumVitae;
     private PositionApplicationStatus status;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm a z")
     private Date applyDate;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm a z")
     private Date lastStatusChangeDate;
 
     public String getCode() {

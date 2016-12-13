@@ -43,8 +43,8 @@ public class DefaultUserRepository extends AbstractRepository<User> implements U
     }
 
     @Override
-    public List<User> getList(Optional<Paging> pagingOptional) {
-        return getList(pagingOptional, "User.find", User.class);
+    public List<User> getList(Paging paging) {
+        return getList(paging, "User.find", User.class);
     }
 
     @Override

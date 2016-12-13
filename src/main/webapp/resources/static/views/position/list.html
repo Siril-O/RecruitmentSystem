@@ -34,8 +34,12 @@
                         <td>{{position.name}}</td>
                         <td>{{position.description}}</td>
                         <td>{{position.dateOfCreation}}</td>
-                        <td><a ng-show="isAuthorisedToApplyPositions()" href="#/position/apply"
-                               ng-click="setPosition(position)" class="btn btn-primary">Apply</a></td>
+                        <td><a ng-show="isAuthorisedToApplyPositions() && position.canApply" href="#/position/apply"
+                               ng-click="setPosition(position)" class="btn btn-primary">Apply</a>
+                            <a ng-show="isAuthorisedToViewApplicants()" href="#/position/applicants"
+                               ng-click="setPosition(position)" class="btn btn-primary">View Applications</a>
+                            <span ng-show="!position.canApply">You have already applied</span>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

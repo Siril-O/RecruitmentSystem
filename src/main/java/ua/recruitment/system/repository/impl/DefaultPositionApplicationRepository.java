@@ -51,8 +51,8 @@ public class DefaultPositionApplicationRepository extends AbstractRepository<Pos
     }
 
     @Override
-    public List<PositionApplication> getList(Optional<Paging> pagingOptional) {
-        return getList(pagingOptional, "PositionApplication.find", PositionApplication.class);
+    public List<PositionApplication> getList(Paging paging) {
+        return getList(paging, "PositionApplication.find", PositionApplication.class);
     }
 
     @Override
@@ -112,7 +112,7 @@ public class DefaultPositionApplicationRepository extends AbstractRepository<Pos
             criterias.add(statusPredicate);
         }
 
-        criteriaQuery.where(criterias.toArray(new Predicate[criterias.size()]));
+        criteriaQuery.select(positionApplicationRoot).where(criterias.toArray(new Predicate[criterias.size()]));
         criteriaQuery.orderBy(builder.asc(positionApplicationRoot.get("applyDate")));
         return criteriaQuery;
     }

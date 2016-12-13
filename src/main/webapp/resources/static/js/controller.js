@@ -1,36 +1,37 @@
 'use strict';
 
-app.controller('UserController', ['ROLES', '$scope', '$http', '$location', function (ROLES, $scope, $http, $location) {
+app.controller('UserController', ['UserService', 'ROLES', 'GENDER', '$scope', '$location', function (UserService, ROLES,
+                                                                                                     GENDER, $scope, $location) {
 
-    $scope.roles = ['RECRUITER', 'APPLICANT'];
-    $scope.genders = ['MALE', 'FEMALE'];
+    $scope.roles = ROLES;
+    $scope.genders = GENDER;
     $scope.date = new Date();
 
     $scope.submitCreateUserForm = function () {
         $scope.headingTitle = "Register User";
-        $http.post('/RecruitmentSystem/user', $scope.user).then(function successCallback(response) {
-            $scope.message = 'Successfully registered';
-        }, function errorCallback(response) {
-            if (response.status == 409) {
-                $scope.message = "User with email: already exist";
-            } else {
-                $scope.message = "Error registering user";
+        UserService.registerUser($scope.user).then(
+            function () {
+                $scope.message = 'Successfully registered';
+            }, function (response) {
+                if (response.status == 409) {
+                    $scope.message = "User with email: already exist";
+                } else {
+                    $scope.message = "Error registering user";
+                }
             }
-            console.log(response);
-        });
+        );
     };
 
     $scope.fetchUsers = function () {
         $scope.headingTitle = "All Users";
-        $http.get('/RecruitmentSystem/user').then(
-            function (response) {
-                $scope.users = response.data;
-                console.log($scope.users);
+        UserService.fetchUsers().then(
+            function (data) {
+                $scope.users = data;
             },
-            function errorCallback(response) {
-                $scope.message = "Error fetching data";
-                console.log(response);
-            });
+            function (error) {
+                $scope.message = "Error fetching users";
+            }
+        );
     };
 
     function init() {
@@ -43,7 +44,7 @@ app.controller('UserController', ['ROLES', '$scope', '$http', '$location', funct
 
 }]);
 
-app.controller('CompanyController', ['CompanyService', '$scope', '$http', function (CompanyService, $scope, $http) {
+app.controller('CompanyController', ['CompanyService', '$scope', function (CompanyService, $scope) {
 
 
     $scope.createCompany = function () {
@@ -76,37 +77,55 @@ app.controller('CompanyController', ['CompanyService', '$scope', '$http', functi
 
 }]);
 
-app.controller('PositionController', ['ApplyPositionService', 'AuthenticationService', '$scope', '$http',
-    function (ApplyPositionService, AuthenticationService, $scope, $http) {
+app.controller('PositionController', ['PositionService', 'ApplyPositionService', 'AuthenticationService', '$scope',
+    function (PositionService, ApplyPositionService, AuthenticationService, $scope) {
 
         $scope.positionStatuses = ['ACTIVE', 'CLOSED'];
         $scope.positionStatus = $scope.positionStatuses[0];
 
         $scope.fetchPositions = function () {
-            $http({
-                url: '/RecruitmentSystem/position',
-                method: "GET",
-                params: {
-                    status: $scope.positionStatus
-                }
-            })
-                .then(function successCallback(response) {
-                    $scope.positions = response.data;
-                }, function errorCallback(response) {
-                    $scope.message = "Error fetching data";
-                    console.log(response);
-                });
+            var positions;
+            PositionService.fetchPositions($scope.positionStatus)
+                .then(
+                    function (data) {
+                        positions = data;
+                        var filterParams = {
+                            applicantEmails: AuthenticationService.getCurrentUser().email
+                        };
+                        ApplyPositionService.getApplicantsForPosition(filterParams).then(
+                            function (data) {
+                                $scope.applications = data;
+                                var appliedPositionCodes = data.map(el = > el.position.code
+                                )
+                                ;
+                                positions.forEach(function (position) {
+                                    position.canApply = !appliedPositionCodes.includes(position.code);
+                                });
+                                $scope.positions = positions;
+                            }, function () {
+                                $scope.error = "Error fetching data";
+                            }
+                        )
+                    },
+                    function (error) {
+                        $scope.error = "Error fetching data";
+                    }
+                );
+
+            $scope.positions = positions;
         };
 
         $scope.createPosition = function (position) {
             position.companyName = position.companyName.name;
-            $http.post('/RecruitmentSystem/position', position)
-                .then(function (response) {
+            PositionService.createPosition().then(
+                function () {
                     $scope.message = 'Successfully registered';
-                }, function () {
-                    $scope.message = 'Error registering company';
-                    console.log(response);
-                })
+
+                },
+                function (error) {
+                    $scope.error = "Error registering company";
+
+                });
         };
 
         $scope.changeFetchedStatuses = function (newStatus) {
@@ -122,10 +141,13 @@ app.controller('PositionController', ['ApplyPositionService', 'AuthenticationSer
             return AuthenticationService.getCurrentUser().userRole == 'APPLICANT';
         };
 
+        $scope.isAuthorisedToViewApplicants = function () {
+            return $scope.isAuthorisedToAddPositions();
+        };
+
         $scope.setPosition = function (position) {
             ApplyPositionService.setPosition(position);
         };
-
 
         $scope.fetchPositions();
 
@@ -139,14 +161,38 @@ app.controller('ApplyPositionController', ['ApplyPositionService', 'Authenticati
         $scope.applyForPosition = function (applyPosition) {
             applyPosition.applicantEmail = AuthenticationService.getCurrentUser().email;
             applyPosition.positionCode = $scope.position.code;
-            console.log(applyPosition);
-                ApplyPositionService.applyForPosition(applyPosition).then(
-                    function (data) {
-                        $scope.message = 'You have applied on position';
-                    },
-                    function (error) {
-                        $scope.error = "Error applying on position";
+            ApplyPositionService.applyForPosition(applyPosition).then(
+                function (data) {
+                    $scope.message = 'You have applied on position';
+                },
+                function (response) {
+                    if (response.status == 409) {
+                        $scope.message = "You have already applied on this position";
+                    } else {
+                        $scope.message = "Error applying on position";
                     }
-                );
-        }
+                }
+            );
+        };
+
+
+    }]);
+
+app.controller('ApplicationsController', ['ApplyPositionService', '$scope',
+    function (ApplyPositionService, $scope) {
+
+        $scope.fetchApplies = function () {
+            var position = ApplyPositionService.getPosition();
+            ApplyPositionService.getApplicantsForPosition({positionCodes: position.code}).then(
+                function (data) {
+                    $scope.applications = data;
+                },
+                function (error) {
+                    $scope.error = "Error fetching data";
+                }
+            );
+        };
+
+        $scope.fetchApplies();
+
     }]);

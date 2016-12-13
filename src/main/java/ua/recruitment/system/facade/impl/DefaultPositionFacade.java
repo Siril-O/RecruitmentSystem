@@ -1,5 +1,7 @@
 package ua.recruitment.system.facade.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import ua.recruitment.system.domain.Company;
 import ua.recruitment.system.domain.PositionApplication;
 import ua.recruitment.system.domain.PositionApplicationStatus;
@@ -8,17 +10,16 @@ import ua.recruitment.system.domain.position.PositionStatus;
 import ua.recruitment.system.domain.user.Applicant;
 import ua.recruitment.system.facade.PositionFacade;
 import ua.recruitment.system.service.company.CompanyService;
+import ua.recruitment.system.service.exception.UniqueConstraintViolation;
 import ua.recruitment.system.service.position.PositionService;
 import ua.recruitment.system.service.position.application.PositionApplicationService;
 import ua.recruitment.system.service.user.UserService;
 import ua.recruitment.system.web.controller.position.dto.ApplyPositionRequest;
 import ua.recruitment.system.web.controller.position.dto.CreatePositionRequest;
 
+import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.UUID;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  * Created by KIRIL on 08.11.2016.
@@ -49,9 +50,13 @@ public class DefaultPositionFacade implements PositionFacade {
     }
 
     @Override
+    @Transactional
     public void applyForPosition(final ApplyPositionRequest request) {
         Applicant applicant = userService.getUserByEmail(request.getApplicantEmail(), Applicant.class);
         Position position = positionService.findPositionByCode(request.getPositionCode());
+        if (applicant.getPositionApplications().stream().map(pa -> pa.getPosition().getCode()).findAny().isPresent()) {
+            throw new UniqueConstraintViolation("Applicant has already applied on this position");
+        }
         PositionApplication positionApplication = new PositionApplication();
         positionApplication.setApplicant(applicant);
         positionApplication.setPosition(position);

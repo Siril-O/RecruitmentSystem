@@ -47,7 +47,6 @@ public class DefaultUserServiceTest {
     }
 
     @Test
-
     public void shouldRegisterUser() {
         when(userRepository.countByEmail(EMAIL)).thenReturn(0L);
 

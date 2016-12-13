@@ -38,8 +38,8 @@ public class DefaultPositionRepository extends AbstractRepository<Position> impl
     }
 
     @Override
-    public List<Position> getList(Optional<Paging> pagingOptional) {
-        return getList(pagingOptional, "Position.find", Position.class);
+    public List<Position> getList(Paging paging) {
+        return getList(paging, "Position.find", Position.class);
     }
 
     @Override

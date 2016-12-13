@@ -37,8 +37,8 @@ public class DefaultCompanyRepository extends AbstractRepository<Company> implem
     }
 
     @Override
-    public List<Company> getList(Optional<Paging> pagingOptional) {
-        return getList(pagingOptional, "Company.find", Company.class);
+    public List<Company> getList(Paging paging) {
+        return getList(paging, "Company.find", Company.class);
     }
 
     @Override

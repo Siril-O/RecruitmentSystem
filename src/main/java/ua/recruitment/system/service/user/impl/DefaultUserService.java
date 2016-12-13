@@ -49,7 +49,7 @@ public class DefaultUserService implements UserService {
 
     @Override
     public List<User> getAllUsers() {
-        return userRepository.getList(Optional.empty());
+        return userRepository.getList(null);
     }
 
     @Override

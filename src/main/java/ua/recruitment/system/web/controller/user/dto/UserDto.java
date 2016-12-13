@@ -1,8 +1,11 @@
 package ua.recruitment.system.web.controller.user.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 /**
  * Created by Kyrylo_Kovalchuk on 11/7/2016.
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDto {
 
     private String firstName;

@@ -1,6 +1,7 @@
 package ua.recruitment.system.facade.impl;
 
 import ua.recruitment.system.domain.PositionApplication;
+import ua.recruitment.system.domain.PositionApplicationStatus;
 import ua.recruitment.system.facade.PositionApplicationFacade;
 import ua.recruitment.system.facade.converter.PositionApplicationToDtoConverter;
 import ua.recruitment.system.service.position.application.PositionApplicationService;
@@ -24,11 +25,12 @@ public class DefaultPositionApplicationFacade implements PositionApplicationFaca
     @Autowired
     private PositionApplicationToDtoConverter positionApplicationToDtoConverter;
 
+
     @Override
-    public List<PositionApplicationDto> getPositionApplications(final GetPositionApplicationsRequest request) {
+    public List<PositionApplicationDto> getPositionApplications(List<String> positionCodes, List<String> applicantEmails,
+                                                                List<PositionApplicationStatus> statuses) {
         List<PositionApplication> positionApplications = positionApplicationService.getFilteredPositionApplications(
-                request.getPositionCodes(),
-                request.getApplicantEmails(), request.getStatuses());
+                positionCodes, applicantEmails, statuses);
         return positionApplicationToDtoConverter.convert(positionApplications);
     }
 }

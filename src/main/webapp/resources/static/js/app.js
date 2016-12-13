@@ -42,6 +42,10 @@ app.config(function ($routeProvider) {
             templateUrl: 'resources/static/views/position/apply.html',
             controller: 'ApplyPositionController'
         })
+        .when('/position/applicants', {
+            templateUrl: 'resources/static/views/position/applicants.html',
+            controller: 'ApplicationsController'
+        })
         .otherwise({redirectTo: '/'});
 })
 
@@ -57,6 +61,6 @@ app.config(function ($routeProvider) {
                 }
             });
         }]);
-    app.constant('ROLES', ['RECRUITER', 'APPLICANT']);
-
+app.constant('ROLES', ['RECRUITER', 'APPLICANT', 'ANONYMOUS']);
+app.constant('GENDER', ['MALE', 'FEMALE']);
 

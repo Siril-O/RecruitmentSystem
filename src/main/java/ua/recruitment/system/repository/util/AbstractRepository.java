@@ -19,9 +19,8 @@ public class AbstractRepository<T> {
     @PersistenceContext
     protected EntityManager entityManager;
 
-    protected Query resolvePaging(Optional<Paging> pagingOptional, Query query) {
-        if (pagingOptional.isPresent()) {
-            Paging paging = pagingOptional.get();
+    protected Query resolvePaging(Paging paging, Query query) {
+        if (paging != null) {
             query.setFirstResult(paging.getStartPosition());
             query.setMaxResults(paging.getMaxResults());
         } else {
@@ -51,9 +50,9 @@ public class AbstractRepository<T> {
         return null;
     }
 
-    protected <H extends T> List<H> getList(Optional<Paging> pagingOptional, String queryString, Class<H> type) {
+    protected <H extends T> List<H> getList(Paging paging, String queryString, Class<H> type) {
         TypedQuery<H> query = entityManager.createNamedQuery(queryString, type);
-        resolvePaging(pagingOptional, query);
+        resolvePaging(paging, query);
         return query.getResultList();
     }
 

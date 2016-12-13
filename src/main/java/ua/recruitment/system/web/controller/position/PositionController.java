@@ -4,13 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import ua.recruitment.system.domain.PositionApplicationStatus;
 import ua.recruitment.system.domain.position.Position;
 import ua.recruitment.system.domain.position.PositionStatus;
 import ua.recruitment.system.facade.PositionApplicationFacade;
 import ua.recruitment.system.facade.PositionFacade;
 import ua.recruitment.system.facade.converter.PositionToDtoConverter;
 import ua.recruitment.system.service.position.PositionService;
-import ua.recruitment.system.web.controller.position.dto.*;
+import ua.recruitment.system.web.controller.position.dto.ApplyPositionRequest;
+import ua.recruitment.system.web.controller.position.dto.CreatePositionRequest;
+import ua.recruitment.system.web.controller.position.dto.PositionApplicationDto;
+import ua.recruitment.system.web.controller.position.dto.PositionDto;
 
 import java.util.List;
 
@@ -55,7 +59,9 @@ public class PositionController {
 
     @RequestMapping(value = "/application", method = RequestMethod.GET)
     @ResponseBody
-    public List<PositionApplicationDto> getPositionAplications(@RequestBody GetPositionApplicationsRequest request) {
-        return positionApplicationFacade.getPositionApplications(request);
+    public List<PositionApplicationDto> getPositionAplications(@RequestParam(required = false) List<String> positionCodes,
+                                                               @RequestParam(required = false) List<String> applicantEmails,
+                                                               @RequestParam(required = false) List<PositionApplicationStatus> statuses) {
+        return positionApplicationFacade.getPositionApplications(positionCodes, applicantEmails, statuses);
     }
 }

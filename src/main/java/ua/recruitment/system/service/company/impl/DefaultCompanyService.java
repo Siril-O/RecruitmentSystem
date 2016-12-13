@@ -26,7 +26,7 @@ public class DefaultCompanyService implements CompanyService {
 
     @Override
     public List<Company> getCompanies() {
-        return companyRepository.getList(Optional.empty());
+        return companyRepository.getList(null);
     }
 
     @Override

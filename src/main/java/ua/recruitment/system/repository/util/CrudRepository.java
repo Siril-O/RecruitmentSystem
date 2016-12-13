@@ -16,7 +16,7 @@ public interface CrudRepository<T> {
 
     T findById(final Long id);
 
-    List<T> getList(Optional<Paging> pagingOptional);
+    List<T> getList(Paging paging);
 
     Long getTotalResultCount();
 

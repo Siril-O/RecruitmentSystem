@@ -1,6 +1,7 @@
 package ua.recruitment.system.web.controller.position.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import ua.recruitment.system.domain.position.PositionStatus;
 import ua.recruitment.system.web.controller.company.dto.CompanyDto;
 
@@ -9,6 +10,7 @@ import java.util.Date;
 /**
  * Created by KIRIL on 08.11.2016.
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PositionDto {
     private String name;
     private String description;

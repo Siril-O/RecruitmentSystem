@@ -1,6 +1,6 @@
 package ua.recruitment.system.facade;
 
-import ua.recruitment.system.web.controller.position.dto.GetPositionApplicationsRequest;
+import ua.recruitment.system.domain.PositionApplicationStatus;
 import ua.recruitment.system.web.controller.position.dto.PositionApplicationDto;
 
 import java.util.List;
@@ -10,7 +10,8 @@ import java.util.List;
  */
 public interface PositionApplicationFacade {
 
-    List<PositionApplicationDto> getPositionApplications(GetPositionApplicationsRequest request);
+    List<PositionApplicationDto> getPositionApplications(List<String> positionCodes, List<String> applicantEmails,
+                                                         List<PositionApplicationStatus> statuses);
 
 
 }

@@ -74,6 +74,7 @@ public class RepositoryConfig {
         Properties properties = new Properties() {
             {
                 setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+                setProperty("hibernate.format_sql", env.getProperty("hibernate.format_sql"));
                 setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
                 setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
             }
