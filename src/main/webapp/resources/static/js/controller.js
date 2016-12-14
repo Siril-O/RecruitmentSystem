@@ -95,7 +95,7 @@ app.controller('PositionController', ['PositionService', 'ApplyPositionService',
                         ApplyPositionService.getApplicantsForPosition(filterParams).then(
                             function (data) {
                                 $scope.applications = data;
-                                var appliedPositionCodes = data.map(el = > el.position.code
+                                var appliedPositionCodes = data.map(el => el.position.code
                                 )
                                 ;
                                 positions.forEach(function (position) {

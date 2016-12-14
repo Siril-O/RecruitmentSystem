@@ -1,19 +1,17 @@
 package ua.recruitment.system.configuration.app;
 
-import ua.recruitment.system.configuration.web.WebConfiguration;
-
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
-import org.springframework.security.access.SecurityConfig;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 /**
  * Created by KIRIL on 06.11.2016.
  */
 @Configuration
-@ComponentScan(basePackages = {"ua.recruitment.system.service", "ua.recruitment.system.facade"})
+@EnableAspectJAutoProxy
+@ComponentScan(basePackages = {"ua.recruitment.system.service", "ua.recruitment.system.facade", "ua.recruitment.system.aop"})
 @Import(value = {RepositoryConfig.class})
-public class ApplicationConfig{
+public class ApplicationConfig {
 
 }
