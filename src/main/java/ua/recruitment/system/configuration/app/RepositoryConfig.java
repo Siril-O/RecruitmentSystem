@@ -14,6 +14,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import ua.recruitment.system.configuration.utils.QueryCounterInterceptor;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -70,15 +71,19 @@ public class RepositoryConfig {
         return new PersistenceExceptionTranslationPostProcessor();
     }
 
+    @Bean
+    public QueryCounterInterceptor hibernateInterceptor() {
+        return new QueryCounterInterceptor();
+    }
+
+
     private Properties getHibernateProperties() {
-        Properties properties = new Properties() {
-            {
-                setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
-                setProperty("hibernate.format_sql", env.getProperty("hibernate.format_sql"));
-                setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
-                setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
-            }
-        };
+        Properties properties = new Properties();
+        properties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+        properties.put("hibernate.format_sql", env.getProperty("hibernate.format_sql"));
+        properties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
+        properties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+        properties.put("hibernate.ejb.interceptor", hibernateInterceptor());
         return properties;
     }
 }

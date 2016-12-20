@@ -12,5 +12,8 @@ import java.util.List;
 public interface PositionRepository extends CrudRepository<Position> {
 
     List<Position> findPositionInStatuses(List<PositionStatus> statuses);
+
+    List<Position> findPositionInStatusesFetchCompanies(List<PositionStatus> statuses);
+
     Position findPositionByCode(String code);
 }

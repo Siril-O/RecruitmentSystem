@@ -17,9 +17,12 @@ import java.util.List;
         @NamedQuery(name = "Position.findInStatuses", query = "SELECT p FROM Position AS p WHERE p.positionStatus IN (:statuses)"),
 })
 
+@NamedEntityGraph(name = Position.POSITION_COMPANIES_GRAPH, attributeNodes = {@NamedAttributeNode("company")})
 
 @Entity
 public class Position {
+
+    public static final String POSITION_COMPANIES_GRAPH = "Position.companies";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

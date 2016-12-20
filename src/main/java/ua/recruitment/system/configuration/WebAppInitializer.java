@@ -2,7 +2,6 @@ package ua.recruitment.system.configuration;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 import ua.recruitment.system.configuration.app.ApplicationConfig;
-import ua.recruitment.system.configuration.security.SecurityConfiguration;
 import ua.recruitment.system.configuration.web.WebConfiguration;
 
 /**
@@ -12,7 +11,7 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{ApplicationConfig.class, SecurityConfiguration.class};
+        return new Class[]{ApplicationConfig.class};
     }
 
     @Override

@@ -12,6 +12,8 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
 
+import static ua.recruitment.system.domain.position.Position.POSITION_COMPANIES_GRAPH;
+
 /**
  * Created by KIRIL on 08.11.2016.
  */
@@ -56,6 +58,14 @@ public class DefaultPositionRepository extends AbstractRepository<Position> impl
     public List<Position> findPositionInStatuses(List<PositionStatus> statuses) {
         TypedQuery<Position> query = entityManager.createNamedQuery("Position.findInStatuses", Position.class);
         query.setParameter("statuses", statuses);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Position> findPositionInStatusesFetchCompanies(List<PositionStatus> statuses) {
+        TypedQuery<Position> query = entityManager.createNamedQuery("Position.findInStatuses", Position.class);
+        query.setParameter("statuses", statuses);
+        query.setHint("javax.persistence.fetchgraph", entityManager.getEntityGraph(POSITION_COMPANIES_GRAPH));
         return query.getResultList();
     }
 

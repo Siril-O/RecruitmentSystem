@@ -47,13 +47,14 @@ app.factory('PositionService', ['$http', '$q', function ($http, $q) {
             );
         },
         createPosition: function (position) {
-            $http.post('/RecruitmentSystem/position', position)
-                .then(function (response) {
-                    return 'Successfully registered';
-                }, function () {
-                    console.error('Error creating new positions');
-                    return $q.reject(errResponse);
-                })
+            return $http.post('/RecruitmentSystem/position', position)
+                .then(
+                    function (response) {
+                        return response;
+                    }, function (errResponse) {
+                        console.error('Error creating new positions');
+                        return $q.reject(errResponse);
+                    });
         }
 
     }

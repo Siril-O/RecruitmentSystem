@@ -1,5 +1,6 @@
 package ua.recruitment.system.service.position;
 
+import javafx.geometry.Pos;
 import org.apache.commons.lang.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class DefaultPositionService implements PositionService {
     @Override
     public List<Position> findPositionInStatuses(List<PositionStatus> statuses) {
         Validate.notEmpty(statuses, "Statuses for position can not be empty");
-        return positionRepository.findPositionInStatuses(statuses);
+        return positionRepository.findPositionInStatusesFetchCompanies(statuses);
     }
 
     @Override

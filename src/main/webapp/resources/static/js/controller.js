@@ -95,9 +95,7 @@ app.controller('PositionController', ['PositionService', 'ApplyPositionService',
                         ApplyPositionService.getApplicantsForPosition(filterParams).then(
                             function (data) {
                                 $scope.applications = data;
-                                var appliedPositionCodes = data.map(el => el.position.code
-                                )
-                                ;
+                                var appliedPositionCodes = data.map(el => el.position.code);
                                 positions.forEach(function (position) {
                                     position.canApply = !appliedPositionCodes.includes(position.code);
                                 });
@@ -117,14 +115,12 @@ app.controller('PositionController', ['PositionService', 'ApplyPositionService',
 
         $scope.createPosition = function (position) {
             position.companyName = position.companyName.name;
-            PositionService.createPosition().then(
+            PositionService.createPosition(position).then(
                 function () {
                     $scope.message = 'Successfully registered';
-
                 },
                 function (error) {
                     $scope.error = "Error registering company";
-
                 });
         };
 
@@ -134,11 +130,13 @@ app.controller('PositionController', ['PositionService', 'ApplyPositionService',
         };
 
         $scope.isAuthorisedToAddPositions = function () {
-            return AuthenticationService.getCurrentUser().userRole == 'RECRUITER';
+            var currentUser = AuthenticationService.getCurrentUser();
+            return currentUser.userRole === 'RECRUITER';
         };
 
         $scope.isAuthorisedToApplyPositions = function () {
-            return AuthenticationService.getCurrentUser().userRole == 'APPLICANT';
+            var currentUser = AuthenticationService.getCurrentUser();
+            return currentUser.userRole === 'APPLICANT';
         };
 
         $scope.isAuthorisedToViewApplicants = function () {
